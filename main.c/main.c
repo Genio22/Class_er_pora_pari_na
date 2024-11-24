@@ -188,14 +188,6 @@ int main()
     // printf("Welcome to pari_na_class. What's your name? ");
     while (strcmp(input, "exit\n") != 0)
     {
-
-        // scanf("%d", &a);
-        // printf("hi");
-        // printf("Choose an lab to check program from that(enter the name only):\n");
-        // printf("1. lab 1");
-        // printf("2. lab 2");
-        // printf("3. lab 3");
-        // printf("4. lab 4");
         printf("Choose a lab to check a program from it (enter the lab name or type 'exit' to quit):\n");
         printf("1. lab1\n");
         printf("2. lab2\n");
@@ -210,14 +202,16 @@ int main()
         }
         else if ((strcmp(input, "lab4\n") == 0) || (strcmp(input, "lab 4\n") == 0))
         {
-            printf("\nYou selected Lab 4.\n");
+            printf("\nYou selected Lab 4. Here are the available programs:\n");
             while (1)
             {
-                printf("\nChoose a program from it (enter the problem name or type 'exit' to quit):\n");
-                printf("1. Problem 1\n");
-                printf("2. Problem 2\n");
-                printf("3. Problem 3\n");
-                printf("4. Problem 4\n");
+                printf("\nChoose a program to run (type 'exit' to return to the main menu):\n");
+                printf("1. Problem 1: Sum of Digits\n");
+                printf("2. Problem 2: Divide by 2 Count\n");
+                printf("3. Problem 3: Max-Min Difference\n");
+                printf("4. Problem 4: Exponentiation\n");
+                printf("5. Problem 5: Factorial Calculation\n");
+                printf("6. Problem 6: Palindrome Check\n");
                 printf("Enter your choice: ");
                 fgets(input, sizeof(input), stdin);
 
@@ -252,13 +246,13 @@ int main()
                 }
                 else
                 {
-                    printf("Please try again.\n");
+                    printf("Invalid choice. Please try again.\n");
                 }
             }
         }
         else
         {
-            printf("Invalid choice. Please try again.\n");
+            printf("Invalid choice. Please select a valid lab or type 'exit' to quit.\n");
         }
         printf("\nDo you want to continue in the program? (Type 'exit' to quit or press Enter to continue): ");
         fgets(input, sizeof(input), stdin);

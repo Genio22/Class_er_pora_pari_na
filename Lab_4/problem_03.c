@@ -5,7 +5,7 @@ difference between the Highest and Lowest number.*/
 int main()
 {
     int num = 0, max = -999999, min = 999999;
-    printf("Enter an integer: ");
+    printf("Enter integers (enter -1 to stop):\n");
     while (1)
     {
         scanf("%d", &num);
@@ -23,7 +23,9 @@ int main()
         }
     }
     int dif = max - min;
-    printf("%d", dif);
+    printf("Difference between highest and lowest: %d\n", dif);
+    while (getchar() != '\n')
+        ;
     return 0;
 }
 

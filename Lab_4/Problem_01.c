@@ -8,13 +8,29 @@ int main()
     if (num < 0)
     {
         num = -num;
+
+        while (num > 0)
+        {
+            digit = num % 10;
+            sum = sum + digit;
+            num = num / 10;
+        }
+        printf("%d", sum);
     }
-    while (num > 0)
+    else
     {
-        digit = num % 10;
-        sum = sum + digit;
-        num = num / 10;
+        while (num > 0)
+        {
+            digit = num % 10;
+            sum = sum + digit;
+            num = num / 10;
+        }
+        printf("%d", sum);
     }
-    printf("%d", sum);
+
+    while (getchar() != '\n')
+        ;
     return 0;
 }
+
+// By sAhAf

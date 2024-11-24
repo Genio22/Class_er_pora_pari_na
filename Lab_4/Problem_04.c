@@ -23,6 +23,10 @@ int main()
         }
         printf("%d^%d = %d\n", base, expo, result);
     }
+    while (getchar() != '\n')
+        ;
 
     return 0;
 }
+
+// By sAhAf

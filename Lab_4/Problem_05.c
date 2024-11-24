@@ -23,6 +23,10 @@ int main()
         }
         printf("Factorial of %d is %d\n", factor, result);
     }
+    while (getchar() != '\n')
+        ;
 
     return 0;
 }
+
+// By sAhAf

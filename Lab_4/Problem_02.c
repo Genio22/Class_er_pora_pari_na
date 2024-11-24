@@ -19,5 +19,9 @@ int main()
         count++;
     }
     printf("The number %d can be divided by 2 exactly %d times.", original, count);
+    while (getchar() != '\n')
+        ;
     return 0;
 }
+
+// By sAhAf

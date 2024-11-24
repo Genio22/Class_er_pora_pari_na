@@ -18,6 +18,9 @@ int main()
         printf("%d is a palindrome.", original);
     else
         printf("%d is not a palindrome.", original);
-
+    while (getchar() != '\n')
+        ;
     return 0;
 }
+
+// By sAhAf

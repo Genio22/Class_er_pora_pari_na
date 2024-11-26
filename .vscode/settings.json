@@ -3,5 +3,6 @@
     "*.java": "java",
     "stdio.h": "c"
   },
-  "C_Cpp.errorSquiggles": "disabled"
+  "C_Cpp.errorSquiggles": "disabled",
+  "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe"
 }

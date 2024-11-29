@@ -13,16 +13,20 @@ int area_calculate(int radius)
     return area;
 }
 
-void gre_les(int area){
-    if (area >= 25){
+void gre_les(int area)
+{
+    if (area >= 25)
+    {
         printf("Greater than 25");
     }
-    else {
+    else
+    {
         printf("Less than 25");
     }
 }
 
-int main(){
+int main()
+{
     printf("Enter the radius of a circle: ");
     scanf("%d", &radius);
     int f_area = area_calculate(radius);

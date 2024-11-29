@@ -1,4 +1,5 @@
-/*The greatest common divisor (GCD) of two integers is the largest integer that evenly divides each of
+/*Problem 6
+The greatest common divisor (GCD) of two integers is the largest integer that evenly divides each of
 the two numbers. Write a function gcd thatreturnsthe greatest common divisor oftwo integers.
 example:Enter a number: 36
 Enter another number: 60
@@ -11,10 +12,11 @@ int a, b, result = 1;
 
 int GCD(int a, int b)
 {
-    a = abs(a);
+    a = abs(a); // to avoid negative number
     b = abs(b);
     for (int i = 1; i <= (a < b ? a : b); i++)
     {
+        // main gcd ai khane check hoy
         if ((a % i == 0) && (b % i == 0))
         {
             result = i;
@@ -41,3 +43,8 @@ int main()
     }
     return 0;
 }
+
+
+
+
+// By AhNaF🙂

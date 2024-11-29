@@ -22,3 +22,9 @@ int main()
     printf("The cudic value of (%d)^3 is %d", a, f_result);
     return 0;
 }
+
+
+
+
+
+// By sAhAf🙂

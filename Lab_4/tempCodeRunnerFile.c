@@ -1,1 +1,0 @@
-printf("%d", count1 -= 1 );

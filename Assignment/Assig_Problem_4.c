@@ -5,31 +5,41 @@ of its digit powers, and check if it equals the original number.*/
 #include <stdio.h>
 #include <math.h>
 
-int main() {
-    int num, divide = 1, or_num, sum = 0, cube;
+int digit_calculate(int num){
+    int count = 0;
+    while(num != 0){        
+        num /= 10;
+        count++;
+    }
+    return count;
+}
 
-    // Prompt the user to input a number
+int power_calculation(int num){
+    int sum = 0, single_digit;
+    int b = digit_calculate(num); 
+    
+    while (num != 0){        
+        single_digit = num % 10;       
+        num /= 10;
+        sum += pow(single_digit, b);
+    }
+    return sum;
+}
+
+int main() {
+    int num, or_num;
+    int total;
     printf("Enter a number to check Armstrong Number: ");
     scanf("%d", &num);
+    // Bug Test
+    int x = digit_calculate(num);
+    printf("%d\n", x);
+    int y = power_calculation(num);
+    printf("%d\n", y);
+    // or_num = num;
+    total = power_calculation(num) ;
 
-    // Preserve the original number for comparison
-    or_num = num;
-
-    // Loop to extract each digit, calculate its cube, and add to the sum
-    while (divide != 0) {
-        divide = or_num % 10;        // Get the last digit
-        or_num = or_num / 10;        // Remove the last digit
-        cube = divide * divide * divide;  // Calculate the cube
-        sum += cube;                 // Add the cube to the sum
-    }
-
-    // Check if the sum equals the original number
-    (sum == num) ? printf("%d is an Armstrong Number.\n", num) : printf("%d is not an Armstrong Number.\n", num);
-    // if (sum == num) {
-    //     printf("%d is an Armstrong Number.\n", num);
-    // } else {
-    //     printf("%d is not an Armstrong Number.\n", num);
-    // }
+    (total == num) ? printf("%d is an Armstrong Number.\n", num) : printf("%d is not an Armstrong Number.\n", num);
 
     return 0;
 }

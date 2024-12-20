@@ -1,36 +1,51 @@
 /*Write a C program to count frequency of each element in an array.*/
-
 #include <stdio.h>
-#include <string.h>
+
+void array_input(int num, int num_arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        num_arr[i] = num % 10;  // Extract the last digit
+        num /= 10;              // Remove the last digit
+    }
+}
 
 int main()
 {
-    int n;
+    int n, num;
 
-    printf("Enter the memory for array (number of digits): ");
+    // Input the size of the array (number of digits)
+    printf("Enter the number of digits: ");
     scanf("%d", &n);
 
-    char num_str[n + 1]; 
+    // Declare an array to store the digits
+    int num_arr[n]; // Array to hold the digits of the number
 
-    printf("Enter the number for the array: ");
-    scanf("%s", num_str);
+    // Input the number
+    printf("Enter the number: ");
+    scanf("%d", &num);
 
-    int freq[10] = {0}; 
+    // Input the digits into the array
+    array_input(num, num_arr, n);
 
-    for (int i = 0; i < strlen(num_str); i++)
+    // Frequency array for digits 0-9
+    int freq[10] = {0};
+
+    // Count the frequency of each digit in the array
+    for (int i = 0; i < n; i++)
     {
-        if (num_str[i] >= '0' && num_str[i] <= '9') 
+        if (num_arr[i] >= 0 && num_arr[i] <= 9)  // Check if the number is a valid digit
         {
-            int digit = num_str[i] - '0'; 
-            freq[digit]++;
+            freq[num_arr[i]]++; // Increment the frequency of the corresponding digit
         }
     }
-    // design korar jono lakchilam 🙂
+
+    // Display the frequency of each digit
     printf("Digit | Frequency\n");
     printf("-----------------\n");
     for (int i = 0; i < 10; i++)
     {
-        if (freq[i] > 0)
+        if (freq[i] > 0) // Print only digits that appear in the input
         {
             printf("  %d   |    %d\n", i, freq[i]);
         }
@@ -38,10 +53,3 @@ int main()
 
     return 0;
 }
-
-
-
-
-
-
-// By sAhAf🙂

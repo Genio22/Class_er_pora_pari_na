@@ -1,4 +1,4 @@
-/*Write a C program to merge two arraysto third array.*/
+/*Write a C program to merge two arrays third array.*/
 
 #include <stdio.h>
 

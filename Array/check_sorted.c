@@ -1,6 +1,6 @@
-/**
- * Program to check if array is sorted in ascending order
- */
+/*
+ Program to check if array is sorted in ascending order
+*/
 #include <stdio.h>
 
 int isSorted(int arr[], int size) {

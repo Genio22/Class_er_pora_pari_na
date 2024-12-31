@@ -40,7 +40,7 @@ void remove_space(char *string)// it can handle space, tab, newline. why pointer
             j++;
         }
     }
-    string[j] = '\0';
+    string[j] = '\0';// termination of array
 }
 
 int palindrom_check(char *string){

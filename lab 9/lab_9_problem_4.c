@@ -14,7 +14,10 @@ void repeat_print(int n){
 
 int main()
 {
-    repeat_print(2);
+    int n;
+    printf("How many times do you want 'Hello World!' to be print? \n");
+    scanf("%d", &n);
+    repeat_print(n);
     return 0;
 }
 

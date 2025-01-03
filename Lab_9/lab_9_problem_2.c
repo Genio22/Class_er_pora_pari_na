@@ -5,7 +5,8 @@ display their information. */
 #include <math.h>
 #include <string.h>
 
-struct mys {
+struct mys
+{
     char title[100];
     char author[100];
     float price;
@@ -16,18 +17,34 @@ int main()
     int n;
     printf("Enter the number of book: ");
     scanf("%d", &n);
-    for(int i = 0; i<n ;i++){
-        printf("Book %s title: ", book.title);
-        fget(book.title, 100, stdin);
-        printf("Book %s author: ", book.author);
-        fget(book.author, 100, stdin);
-        printf("Book %d price: ", price);
-        scanf("%f", &book.price);
+    getchar();
+    struct mys book[n];
+
+
+    // Input
+    for (int i = 0; i < n; i++)
+    {
+        printf("Enter details for book %d\n", i + 1);
+        printf("Title: ");
+        fgets(book[i].title, 100, stdin);
+        // scanf("%s",&book[i].title);
+        printf("Author: ");
+        fgets(book[i].author, 100, stdin);
+        // scanf("%s",&book[i].author);
+        printf("Price: ");
+        scanf("%f", &book[i].price);
+        getchar();
     }
-    
-    printf ("%s\n", book.title);
-    printf ("%s\n", book.author);
-   return 0;
+
+    // Output
+    for (int i = 0; i < n; i++)
+    {
+        printf("Book %d\n", i+1);
+        printf("Title: %s", book[i].title);
+        printf("Author: %s", book[i].author);
+        printf("Price: %.2f\n", book[i].price);
+    }
+    return 0;
 }
 
 /*#include <stdio.h>
@@ -50,7 +67,7 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         printf("Enter details for book %d\n", i + 1);
-        
+
         // Read the title of the book
         printf("Book %d title: ", i + 1);
         fgets(books[i].title, sizeof(books[i].title), stdin);
@@ -80,8 +97,5 @@ int main() {
     return 0;
 }
 */
-
-
-
 
 // By sAhAf🙂

@@ -7,12 +7,12 @@
 int sum(int n)
 {
 
-    int d,r;
-    if (n ==0) return 0;
+    int d, r;
+    if (n == 0)
+        return 0;
     d = n % 10;
-    r = d + sum(n/10);
+    r = d + sum(n / 10);
     return r;
-
 }
 
 int main()
@@ -24,4 +24,3 @@ int main()
     printf("%d", sum1);
     return 0;
 }
-

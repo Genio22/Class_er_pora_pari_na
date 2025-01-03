@@ -6,10 +6,12 @@ recursion. Remember that you cannot use any loop in this program.*/
 #include <math.h>
 #include <string.h>
 
-void repeat_print(int n){
-    if (n == 0) return;
+void repeat_print(int n)
+{
+    if (n == 0)
+        return;
     printf("Hello World!\n");
-    repeat_print(n-1);
+    repeat_print(n - 1);
 }
 
 int main()
@@ -21,8 +23,4 @@ int main()
     return 0;
 }
 
-
-
-
 // By sAhAf🙂
-

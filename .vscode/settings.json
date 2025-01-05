@@ -2,7 +2,15 @@
   "files.associations": {
     "*.java": "java",
     "stdio.h": "c",
-    "math.h": "c"
+    "math.h": "c",
+    "array": "c",
+    "*.tcc": "c",
+    "memory": "c",
+    "functional": "c",
+    "istream": "c",
+    "tuple": "c",
+    "utility": "c",
+    "stdlib.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe"

@@ -1,5 +1,5 @@
 
-/* comment */
+/* Hotel-Management-System-Project */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,6 +14,7 @@ typedef struct
     int floor;
     char type[20];
     char view[20];
+    char ac_type[20];
     int basePrice;
     int isOccupied;
 } Room;
@@ -22,20 +23,20 @@ typedef struct
 Room hotelRooms[MAX_ROOMS];
 int roomCount = 0;
 
-
 // Function prototypes
 void showMenu();
 void initializeRooms();
 void displayRooms();
 void AddRoom();
+void book_room();
 // void roombook();
 
 int main()
 {
     int choice = 0;
     initializeRooms();
-    
-    while (choice != 3)
+
+    while (choice != 4)
     {
         showMenu();
         scanf("%d", &choice);
@@ -47,6 +48,11 @@ int main()
         case 2:
             AddRoom();
             break;
+        case 3:
+            book_room();
+            break;
+        case 4:
+            return 0;
 
         default:
             printf("Invalid choice. Please try again.\n");
@@ -55,34 +61,38 @@ int main()
 
     return 0;
 }
-void showMenu() {
+void showMenu()
+{
     printf("\n--- Hotel Management System ---\n");
     printf("1. Display Available Rooms\n");
     printf("2. Add a Room\n");
-    printf("3. Exit\n");
+    printf("3. Book Romm\n");
+    printf("4. Exit\n");
     printf("Enter your choice: ");
 }
 
 void initializeRooms()
 {
-    int roomNumber = 100;
+    int roomNumber = 1;
     for (int floor = 1; floor <= MAX_FLOORS; floor++) // total floor in building
     {
         for (int i = 0; i < 4; i++) // akta floor e 4 ta room
         {
-            hotelRooms[roomCount].roomNumber = roomNumber++; // one kore room number bariteche
+            hotelRooms[roomCount].roomNumber = floor * 100 + 1; // one kore room number bariteche // new fix room number by floor
 
             hotelRooms[roomCount].floor = floor; // for each iteration floor remain same
             if (i % 2 == 0)                      // amni akt logic to get value for other parameter
             {
                 strcpy(hotelRooms[roomCount].type, "Single");
                 strcpy(hotelRooms[roomCount].view, "Sea View");
+                strcpy(hotelRooms[roomCount].ac_type, "AC Room");
                 hotelRooms[roomCount].basePrice = 1350;
             }
             else
             {
                 strcpy(hotelRooms[roomCount].type, "Double");
                 strcpy(hotelRooms[roomCount].view, "City View");
+                strcpy(hotelRooms[roomCount].ac_type, "Non AC Room");
                 hotelRooms[roomCount].basePrice = 2000;
             }
             hotelRooms[roomCount].isOccupied = 0;
@@ -122,7 +132,7 @@ void AddRoom()
         strcpy(hotelRooms[roomCount].view, view);
 
         roomCount++;
-        printf("\n\n  ---- Room added successfully.------\n");
+        printf("\n\n  ------ Room added successfully.------  \n");
         printf("Room Number: %d\nFloor: %d\nRoom Type: %s\nView: %s\nBase Price: %d\nOccupied: %d\n",
                roomNumber, floor, type, view, basePrice, isOccupied);
     }
@@ -139,10 +149,34 @@ void displayRooms()
     {
         if (!hotelRooms[i].isOccupied)
         {
-            printf("Room Number: %d, Floor: %d, Type: %s, View: %s, Base Price: %dtake\n",
+            printf("Room Number: %d, Floor: %d, Type: %s, View: %s, AC type: %s, Base Price: %dtake\n",
                    hotelRooms[i].roomNumber, hotelRooms[i].floor,
-                   hotelRooms[i].type, hotelRooms[i].view,
+                   hotelRooms[i].type, hotelRooms[i].view, hotelRooms[i].ac_type,
                    hotelRooms[i].basePrice);
+        }
+    }
+}
+
+void book_room()
+{
+    int roomNumber = 0;
+    printf("Enter Room number: ");
+    scanf("%d", &roomNumber);
+    for (int i = 0; i < roomCount; i++)
+    {
+        if (roomNumber == hotelRooms[i].roomNumber)
+        {
+            if (hotelRooms[i].isOccupied == 0)
+            {
+                hotelRooms[i].isOccupied = 1;
+                printf("Room %d has been booked successfully!\n", hotelRooms[i].roomNumber);
+            }
+            else
+            {
+                printf("Room %d is already booked.\n", hotelRooms[i].roomNumber);
+                
+            }
+            break;
         }
     }
 }
@@ -164,7 +198,7 @@ void displayRooms()
 //         price *= 1.2;
 //     }
 
-//     return price * stayDuration; 
+//     return price * stayDuration;
 // }
 
 // By sAhAf🙂

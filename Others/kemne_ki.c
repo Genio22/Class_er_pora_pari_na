@@ -152,3 +152,8 @@ int isPeakSeason() {
     scanf("%d", &month);
     return (month >= PEAK_SEASON_START || month <= PEAK_SEASON_END);
 }
+
+
+
+
+

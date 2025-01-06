@@ -312,7 +312,7 @@ void bookRoom()
 
 void saveRoomsToFile()
 {
-    FILE *file = fopen("rooms.dat", "wb");
+    FILE *file = fopen("rooms.txt", "w");
     if (file == NULL)
     {
         printf("Error: Unable to save room data to file.\n");
@@ -326,7 +326,7 @@ void saveRoomsToFile()
 
 void loadRoomsFromFile()
 {
-    FILE *file = fopen("rooms.dat", "rb");
+    FILE *file = fopen("rooms.txt", "r");
     if (file == NULL)
     {
         printf("No saved room data found. Initializing default rooms.\n");

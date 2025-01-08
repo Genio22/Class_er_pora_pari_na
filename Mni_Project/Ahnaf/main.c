@@ -29,6 +29,7 @@ void initializeRooms();
 void displayRooms();
 void AddRoom();
 void book_room();
+void checkout();
 
 int main()
 {
@@ -38,7 +39,7 @@ int main()
     scanf("%d", &MAX_FLOORS);
     initializeRooms(MAX_FLOORS);
 
-    while (choice != 4)
+    while (choice != 5)
     {
         showMenu();
         scanf("%d", &choice);
@@ -54,6 +55,9 @@ int main()
             book_room();
             break;
         case 4:
+            checkout();
+            break;
+        case 5:
             printf("See you. Bye:)");
             return 0;
 
@@ -69,8 +73,9 @@ void showMenu()
     printf("\n--- Hotel Management System ---\n");
     printf("1. Display Available Rooms\n");
     printf("2. Add a Room\n");
-    printf("3. Book Romm\n");
-    printf("4. Exit\n");
+    printf("3. Room Booking\n");
+    printf("4. Checkout\n");
+    printf("5. Exit\n");
     printf("Enter your choice: ");
 }
 
@@ -110,6 +115,7 @@ void initializeRooms(int MAX_FLOORS)
     }
     printf("Default rooms initialized!\n");
 }
+
 // done by tahsin
 void AddRoom()
 {
@@ -156,7 +162,7 @@ void AddRoom()
 
 void displayRooms()
 {
-    printf("\n--- Available Rooms ---\n");
+    /*printf("\n--- Available Rooms ---\n");
     for (int i = 0; i < roomCount; i++)
     {
         if (!hotelRooms[i].isOccupied)
@@ -177,14 +183,41 @@ void displayRooms()
                    hotelRooms[i].type, hotelRooms[i].view, hotelRooms[i].ac_type,
                    hotelRooms[i].basePrice);
         }
+    }*/
+    printf("\nRoom Data:\n");
+    printf("-----------------------------------------------------------------------------\n");
+    printf("| Room No | Floor | Type     | View       | AC Type     | Occupied | Price  |\n");
+    printf("-----------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < roomCount; i++)
+    {
+        printf("| %-7d | %-5d | %-8s | %-10s | %-11s | %-8s | %-6d |\n",
+               hotelRooms[i].roomNumber,
+               hotelRooms[i].floor,
+               hotelRooms[i].type,
+               hotelRooms[i].view,
+               hotelRooms[i].ac_type,
+               hotelRooms[i].isOccupied ? "Yes" : "No",
+               hotelRooms[i].basePrice);
     }
+
+    printf("----------------------------------------------------------------------------------\n");
 }
 
 void book_room()
 {
     int roomNumber = 0;
+    char type[30];
     printf("Enter Room number: ");
     scanf("%d", &roomNumber);
+    printf("What type room you want single/double");
+    scanf("%[^\n]s", type);
+    for (int i = 0; i < roomCount; i++)
+    {
+        if (strcmp(type, hotelRooms[i].type)){
+            printf
+        }
+    }
     for (int i = 0; i < roomCount; i++)
     {
         if (roomNumber == hotelRooms[i].roomNumber)
@@ -196,11 +229,36 @@ void book_room()
             }
             else
             {
-                printf("Room %d is already booked.\n", hotelRooms[i].roomNumber);
+                t
+                    printf("Room %d is already booked.\n", hotelRooms[i].roomNumber);
             }
             break;
         }
     }
+}
+
+void checkout()
+{
+    int roomNumber = 0;
+    printf("Enter Room number: ");
+    scanf("%d", &roomNumber);
+    for (int i = 0; i < roomCount; i++)
+    {
+        if (roomNumber == hotelRooms[i].roomNumber)
+        {
+            if (hotelRooms[i].isOccupied)
+            {
+                hotelRooms[i].isOccupied = 0;
+                printf("You have been succesfully checkout from Room %d!\n", hotelRooms[i].roomNumber);
+            }
+            else
+            {
+                printf("Room %d is already Unoccupied. So checkout is not possible.\n", hotelRooms[i].roomNumber);
+            }
+            break;
+        }
+    }
+    // done by sa
 }
 
 // void book_room(char hotel[ROOMS][20], int room) {

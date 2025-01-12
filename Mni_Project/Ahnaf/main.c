@@ -76,6 +76,7 @@ int main()
         case 5:
             printf("See you. Bye:)");
             savefile();
+            printf("Data Saved in file");
             return 0;
 
         default:

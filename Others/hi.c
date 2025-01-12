@@ -117,7 +117,7 @@ void initializeRooms(int floors, int roomsPerFloor)
     printf("Rooms initialized with random data.\n");
 }
 
-1                                                                                                                                                                                       printf("\nRoom Data:\n");
+                                                                                                                                                                                       printf("\nRoom Data:\n");
     printf("------------------------------------------------------------\n");
     printf("| Room No | Floor | Type     | View       | AC Type     | Occupied | Price  |\n");
     printf("------------------------------------------------------------\n");

@@ -6,6 +6,11 @@
 
 #define MAX_ROOMS 100
 // #define MAX_FLOORS 10
+#define max_user 100
+#define ADMIN_USERNAME "admin"
+#define ADMIN_PASSWORD "admin123"
+#define USER_USERNAME "user"
+#define USER_PASSWORD "user123"
 
 // Room structure
 typedef struct
@@ -19,8 +24,16 @@ typedef struct
     int isOccupied;
 } Room;
 
+typedef struct
+{
+    char name[30];
+    char nid[30];
+    long int number;
+} customer;
+
 // Global variables
 Room hotelRooms[MAX_ROOMS];
+customer c[max_user];
 int roomCount = 0, MAX_FLOORS = 0;
 
 // Function prototypes
@@ -30,6 +43,7 @@ void displayRooms();
 void AddRoom();
 void book_room();
 void checkout();
+void savefile();
 
 int main()
 {
@@ -38,11 +52,13 @@ int main()
 
     scanf("%d", &MAX_FLOORS);
     initializeRooms(MAX_FLOORS);
+    // savefile();
 
     while (choice != 5)
     {
         showMenu();
         scanf("%d", &choice);
+        getchar();
         switch (choice)
         {
         case 1:
@@ -59,6 +75,7 @@ int main()
             break;
         case 5:
             printf("See you. Bye:)");
+            savefile();
             return 0;
 
         default:
@@ -68,6 +85,47 @@ int main()
 
     return 0;
 }
+
+// admin and user login interfage
+int login(const char *username, const char *password)
+{
+    char inputUsername[20], inputPassword[20];
+
+    printf("Enter Username: ");
+    scanf("%s", inputUsername);
+    printf("Enter Password: ");
+    scanf("%s", inputPassword);
+
+    if (strcmp(username, inputUsername) == 0 && strcmp(password, inputPassword) == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void showAdminMenu()
+{
+    printf("\n--- Hotel Management System ---\n");
+    printf("1. Display Available Rooms\n");
+    printf("2. Add a Room\n");
+    printf("3. Room Booking\n");
+    printf("4. Checkout\n");
+    printf("5. Exit\n");
+    printf("Enter your choice: ");
+}
+
+void showUserMenu()
+{
+    printf("\n--- User Menu ---\n");
+    printf("1. Display Available Rooms\n");
+    printf("2. Book a Room\n");
+    printf("3. Exit\n");
+    printf("Enter your choice: ");
+} // code by al amin (login function )
+
 void showMenu()
 {
     printf("\n--- Hotel Management System ---\n");
@@ -207,35 +265,93 @@ void displayRooms()
 void book_room()
 {
     int roomNumber = 0;
-    char type[30];
-    printf("Enter Room number: ");
-    scanf("%d", &roomNumber);
-    printf("What type room you want single/double");
+    char type[30], view[30], ac[30];
+    int foundroom[MAX_ROOMS];
+    int foundcount = 0;
+    int found = 0;
+
+    printf("Enter the room type (single/double): ");
     scanf("%[^\n]s", type);
+    getchar(); // to clear the buffer
+
+    // Filter by type and store it in custom local array
     for (int i = 0; i < roomCount; i++)
     {
-        if (strcmp(type, hotelRooms[i].type)){
-            printf
+        if (hotelRooms[i].isOccupied == 0 && strcmp(hotelRooms[i].type, type) == 0)
+        {
+            foundroom[foundcount++] = i;
         }
     }
-    for (int i = 0; i < roomCount; i++)
+
+    printf("Do you want ac or non ac room? -> ");
+    scanf("%[^\n]s", ac);
+    getchar();
+
+    // Filter by ac
+    for (int i = 0; i < foundcount;)
     {
-        if (roomNumber == hotelRooms[i].roomNumber)
+        if (strcmp(hotelRooms[foundroom[i]].ac_type, ac) != 0)
         {
-            if (!hotelRooms[i].isOccupied)
+            for (int j = i; j < foundcount - 1; j++)
             {
-                hotelRooms[i].isOccupied = 1;
-                printf("Room %d has been booked successfully!\n", hotelRooms[i].roomNumber);
+                foundroom[j] = foundroom[j + 1]; // removing the not match item
             }
-            else
-            {
-                t
-                    printf("Room %d is already booked.\n", hotelRooms[i].roomNumber);
-            }
-            break;
+            foundcount--;
         }
+        else
+        {
+            i++;
+        }
+    }
+
+    printf("Do you prefer Sea View or City View? ");
+    scanf("%[^\n]s", view);
+    getchar();
+
+    // Filter by view
+    for (int i = 0; i < foundcount;)
+    {
+        if (strcmp(hotelRooms[foundroom[i]].view, view) != 0)
+        {
+            for (int j = i; j < foundcount - 1; j++)
+            {
+                foundroom[j] = foundroom[j + 1]; // removing the not match item
+            }
+            foundcount--;
+        }
+        else
+        {
+            i++;
+        }
+    }
+
+    if (foundcount == 0)
+    {
+        printf("No available rooms match your criteria.\n");
+    }
+    else
+    {
+        printf("\nRoom Data:\n");
+        printf("-----------------------------------------------------------------------------\n");
+        printf("| Room No | Floor | Type     | View       | AC Type     | Occupied | Price  |\n");
+        printf("-----------------------------------------------------------------------------\n");
+
+        for (int i = 0; i < foundcount; i++)
+        {
+            printf("| %-7d | %-5d | %-8s | %-10s | %-11s | %-8s | %-6d |\n",
+                   hotelRooms[foundroom[i]].roomNumber,
+                   hotelRooms[foundroom[i]].floor,
+                   hotelRooms[foundroom[i]].type,
+                   hotelRooms[foundroom[i]].view,
+                   hotelRooms[foundroom[i]].ac_type,
+                   hotelRooms[foundroom[i]].isOccupied ? "Yes" : "No",
+                   hotelRooms[foundroom[i]].basePrice);
+        }
+
+        printf("----------------------------------------------------------------------------------\n");
     }
 }
+
 
 void checkout()
 {
@@ -258,7 +374,20 @@ void checkout()
             break;
         }
     }
-    // done by sa
+    // done by sahaf
+}
+
+void savefile()
+{
+    FILE *f1;
+    f1 = fopen("text2.txt", "w");
+    // for (int i = 0; i < roomCount; i++)
+    // {
+    // fwrite(hotelRooms, sizeof(Room), 1, f1);
+    //}
+    fwrite(&roomCount, sizeof(int), 1, f1);
+    fwrite(hotelRooms, sizeof(Room), roomCount, f1);
+    fclose(f1);
 }
 
 // void book_room(char hotel[ROOMS][20], int room) {

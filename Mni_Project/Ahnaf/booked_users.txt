@@ -1,3 +1,0 @@
-Name, Phone Number, Email, Address, ID Type, ID Number, Room Number, Stay Duration, Check-in Date, Check-out Date
-sda, asd, da, dd, asasd, ad, 501, 0, 5, fd
-Name, Phone Number, Email, Address, ID Type, ID Number, Room Number, Stay Duration, Check-in Date, Check-out Date

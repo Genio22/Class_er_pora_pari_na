@@ -1,0 +1,88 @@
+----------------------------------------------------------------------------------------
+| Room Number  | Floor | Type      | View         | AC Type      | Base Price | Occupied |
+| 101          | 1     | double    | City View    | AC Room      | 2000       | No       |
+| 102          | 1     | double    | Sea View     | AC Room      | 3000       | No       |
+| 103          | 1     | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 104          | 1     | double    | City View    | Non AC Room  | 1200       | No       |
+| 201          | 2     | double    | Sea View     | Non AC Room  | 1350       | No       |
+| 202          | 2     | double    | Sea View     | AC Room      | 5000       | No       |
+| 203          | 2     | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 204          | 2     | single    | City View    | Non AC Room  | 1350       | No       |
+| 301          | 3     | double    | Sea View     | Non AC Room  | 2000       | No       |
+| 302          | 3     | double    | City View    | Non AC Room  | 1350       | No       |
+| 303          | 3     | double    | City View    | AC Room      | 1350       | No       |
+| 304          | 3     | double    | Sea View     | Non AC Room  | 2000       | No       |
+| 401          | 4     | double    | Sea View     | Non AC Room  | 1200       | No       |
+| 402          | 4     | single    | City View    | Non AC Room  | 2000       | No       |
+| 403          | 4     | double    | City View    | Non AC Room  | 2000       | No       |
+| 404          | 4     | single    | City View    | AC Room      | 1350       | No       |
+| 501          | 5     | single    | Sea View     | AC Room      | 3000       | No       |
+| 502          | 5     | single    | Sea View     | AC Room      | 5000       | No       |
+| 503          | 5     | single    | City View    | AC Room      | 1200       | No       |
+| 504          | 5     | single    | City View    | Non AC Room  | 1200       | No       |
+| 601          | 6     | double    | City View    | AC Room      | 2000       | No       |
+| 602          | 6     | single    | Sea View     | AC Room      | 3000       | No       |
+| 603          | 6     | double    | Sea View     | AC Room      | 5000       | No       |
+| 604          | 6     | single    | City View    | Non AC Room  | 2000       | No       |
+| 701          | 7     | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 702          | 7     | double    | City View    | Non AC Room  | 1350       | No       |
+| 703          | 7     | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 704          | 7     | double    | Sea View     | Non AC Room  | 1200       | No       |
+| 801          | 8     | single    | Sea View     | AC Room      | 5000       | No       |
+| 802          | 8     | double    | City View    | Non AC Room  | 1350       | No       |
+| 803          | 8     | single    | Sea View     | Non AC Room  | 1350       | No       |
+| 804          | 8     | double    | City View    | Non AC Room  | 2000       | No       |
+| 901          | 9     | double    | Sea View     | AC Room      | 3000       | No       |
+| 902          | 9     | double    | Sea View     | AC Room      | 3000       | No       |
+| 903          | 9     | double    | City View    | Non AC Room  | 1350       | No       |
+| 904          | 9     | double    | City View    | Non AC Room  | 1350       | No       |
+| 1001         | 10    | double    | City View    | Non AC Room  | 1200       | No       |
+| 1002         | 10    | double    | Sea View     | AC Room      | 3000       | No       |
+| 1003         | 10    | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 1004         | 10    | single    | City View    | AC Room      | 1200       | No       |
+
+
+
+----------------------------------------------------------------------------------------
+| Room Number  | Floor | Type      | View         | AC Type      | Base Price | Occupied |
+-------------------------------------------------------------------------------------------
+| 101          | 1     | double    | City View    | AC Room      | 2000       | No       |
+| 102          | 1     | double    | Sea View     | AC Room      | 3000       | No       |
+| 103          | 1     | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 104          | 1     | double    | City View    | Non AC Room  | 1200       | No       |
+| 201          | 2     | double    | Sea View     | Non AC Room  | 1350       | No       |
+| 202          | 2     | double    | Sea View     | AC Room      | 5000       | No       |
+| 203          | 2     | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 204          | 2     | single    | City View    | Non AC Room  | 1350       | No       |
+| 301          | 3     | double    | Sea View     | Non AC Room  | 2000       | No       |
+| 302          | 3     | double    | City View    | Non AC Room  | 1350       | No       |
+| 303          | 3     | double    | City View    | AC Room      | 1350       | No       |
+| 304          | 3     | double    | Sea View     | Non AC Room  | 2000       | No       |
+| 401          | 4     | double    | Sea View     | Non AC Room  | 1200       | No       |
+| 402          | 4     | single    | City View    | Non AC Room  | 2000       | No       |
+| 403          | 4     | double    | City View    | Non AC Room  | 2000       | No       |
+| 404          | 4     | single    | City View    | AC Room      | 1350       | No       |
+| 501          | 5     | single    | Sea View     | AC Room      | 3000       | No       |
+| 502          | 5     | single    | Sea View     | AC Room      | 5000       | No       |
+| 503          | 5     | single    | City View    | AC Room      | 1200       | No       |
+| 504          | 5     | single    | City View    | Non AC Room  | 1200       | No       |
+| 601          | 6     | double    | City View    | AC Room      | 2000       | No       |
+| 602          | 6     | single    | Sea View     | AC Room      | 3000       | No       |
+| 603          | 6     | double    | Sea View     | AC Room      | 5000       | No       |
+| 604          | 6     | single    | City View    | Non AC Room  | 2000       | No       |
+| 701          | 7     | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 702          | 7     | double    | City View    | Non AC Room  | 1350       | No       |
+| 703          | 7     | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 704          | 7     | double    | Sea View     | Non AC Room  | 1200       | No       |
+| 801          | 8     | single    | Sea View     | AC Room      | 5000       | No       |
+| 802          | 8     | double    | City View    | Non AC Room  | 1350       | No       |
+| 803          | 8     | single    | Sea View     | Non AC Room  | 1350       | No       |
+| 804          | 8     | double    | City View    | Non AC Room  | 2000       | No       |
+| 901          | 9     | double    | Sea View     | AC Room      | 3000       | No       |
+| 902          | 9     | double    | Sea View     | AC Room      | 3000       | No       |
+| 903          | 9     | double    | City View    | Non AC Room  | 1350       | No       |
+| 904          | 9     | double    | City View    | Non AC Room  | 1350       | No       |
+| 1001         | 10    | double    | City View    | Non AC Room  | 1200       | No       |
+| 1002         | 10    | double    | Sea View     | AC Room      | 3000       | No       |
+| 1003         | 10    | single    | Sea View     | Non AC Room  | 1200       | No       |
+| 1004         | 10    | single    | City View    | AC Room      | 1200       | No       |

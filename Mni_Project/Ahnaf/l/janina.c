@@ -3,12 +3,16 @@
 #include <stdlib.h> // rad() use kora lagche
 #include <string.h>
 
+#define HOTEL_NAME "Paradise"
+#define HOTEL_ADDRESS "Cox Bazer"
+#define HOTEL_PHONE "01922322354"
+#define HOTEL_EMAIL "hotelparadise@gmail.com"
 #define MAX_ROOMS 100
 #define MAX_FLOORS 10
 #define max_user 100
 #define ADMIN_USERNAME "admin"
 #define ADMIN_PASSWORD "admin123"
-#define USER_USERNAME ""
+// #define USER_USERNAME ""
 #define USER_PASSWORD "user123"
 
 // Room structure
@@ -33,6 +37,8 @@ typedef struct
     char idType[30]; // e.g., Passport, Driver's License
     char idNumber[30];
     int roomNumber;
+    int total_price;
+    int base_price;
     int stayDuration;
     char checkInDate[15];
     char checkOutDate[15];
@@ -72,6 +78,7 @@ void save_book_users_data();
 void display_book_users_data();
 void save_Room_Details_data();
 void display_Room_Details_data();
+void print_bill(int i);
 
 int main()
 {
@@ -81,56 +88,62 @@ int main()
     printf("\n\nWelcome to the Hotel Management System\n");
     // printf("Enter the total number of floors in the hotel: ");
     // scanf("%d", &MAX_FLOORS);
-    // getchar(); // Clear the newline character from the input buffer.
+    // getchar();
 
     initializeRooms(); // first e rooms Initialize kotechi based on the total number of floors.
-
     printf("\nPlease login to access the system:\n");
     int loginType = 0;
-
-    // login type: Admin or User
-    printf("1. Admin Login\n");
-    printf("2. User Login\n");
-    // printf("3. Exit\n");
-    printf("Enter your choice (1 for Admin, 2 for User): ");
-    scanf("%d", &loginType);
-    getchar();
-
-    int isLoggedIn = 0;
-
-    // Login validation for Admin or User
-    if (loginType == 1)
+    while (loginType != 3)
     {
-        isLoggedIn = login(ADMIN_USERNAME, ADMIN_PASSWORD);
-        if (isLoggedIn)
+        /* code */
+
+        // login type: Admin or User
+        printf("1. Admin Login\n");
+        printf("2. User Login\n");
+        printf("3. Exit\n");
+        printf("Enter your choice (1 for Admin, 2 for User): ");
+        scanf("%d", &loginType);
+        getchar();
+
+        int isLoggedIn = 0;
+
+        // Login validation for Admin or User
+        if (loginType == 1)
         {
-            printf("\nAdmin login successful!\n");
+            isLoggedIn = login(ADMIN_USERNAME, ADMIN_PASSWORD);
+            if (isLoggedIn)
+            {
+                printf("\nAdmin login successful!\n");
+                break;
+            }
+            else
+            {
+                printf("\nAdmin login failed. Please try again.\n");
+            }
+        }
+        else if (loginType == 2)
+        {
+            isLoggedIn = 1; // Assume user login is always successful for now
+            if (isLoggedIn)
+            {
+                printf("\nUser login successful!\n");
+                break;
+            }
+            else
+            {
+                printf("\nUser login failed. Please try again.\n");
+            }
+        }
+        else if (loginType == 3)
+        {
+            printf("\nExiting system. Goodbye!\n");
+            return 0;
         }
         else
         {
-            printf("\nAdmin login failed. Exiting system.\n");
-            return 0;
+            printf("\nInvalid choice. Please try again.\n");
         }
     }
-    else if (loginType == 2)
-    {
-        isLoggedIn = 1;//login(USER_USERNAME, USER_PASSWORD);
-        if (isLoggedIn)
-        {
-            printf("\nUser login successful!\n");
-        }
-        else
-        {
-            printf("\nUser login failed. Exiting system.\n");
-            return 0;
-        }
-    }
-    else
-    {
-        printf("\nInvalid login type. Exiting system.\n");
-        return 0;
-    }
-
     // Menu loop for Admin or User
     while (choice != 5)
     {
@@ -188,6 +201,9 @@ int main()
         case 7:
             display_Room_Details_data();
             break;
+        case 8:
+            print_bill(0);
+            break;
         default: // Invalid input
             printf("Invalid choice. Please try again.\n");
         }
@@ -231,8 +247,9 @@ int login(const char *username, const char *password)
 void showAdminMenu()
 {
     printf("\n********************************************\n");
-    printf("*      HOTEL MANAGEMENT SYSTEM - ADMIN     *\n");
+    printf("*        Welcome to HOTEL %s        *\n", HOTEL_NAME);
     printf("********************************************\n");
+    // printf("*                 ADMIN                    *\n");
     printf("*  1. Display Available Rooms              *\n");
     printf("*  2. Add a Room                           *\n");
     printf("*  3. Room Booking                         *\n");
@@ -245,7 +262,7 @@ void showAdminMenu()
 void showUserMenu()
 {
     printf("\n********************************************\n");
-    printf("*          HOTEL MANAGEMENT SYSTEM         *\n");
+    printf("*        Welcome to HOTEL %s         *\n", HOTEL_NAME);
     printf("********************************************\n");
     printf("*  1. Display Available Rooms              *\n");
     printf("*  3. Book a Room                          *\n");
@@ -253,19 +270,6 @@ void showUserMenu()
     printf("********************************************\n");
     printf("Enter your choice: ");
 } // code by al amin (login function )
-
-// void showMenu()
-// {
-//     printf("\n--- Hotel Management System ---\n");
-//     printf("1. Display Available Rooms\n");
-//     printf("2. Add a Room\n");
-//     printf("3. Room Booking\n");
-//     printf("4. Checkout\n");
-//     printf("5. Exit\n");
-//     printf("Enter your choice: ");
-// }
-
-// rand();
 
 void initializeRooms()
 {
@@ -277,7 +281,7 @@ void initializeRooms()
     int basePrice1[] = {3000, 5000};
     for (int floor = 1; floor <= MAX_FLOORS; floor++) // total floor in building
     {
-        for (int i = 0; i < (MAX_ROOMS/MAX_FLOORS); i++) // akta floor e 4 ta room
+        for (int i = 0; i < (MAX_ROOMS / MAX_FLOORS); i++) // akta floor e 4 ta room
         {
             hotelRooms[roomCount].roomNumber = (floor * 100) + (i + 1); // one kore room number bariteche // new fix room number by floor
 
@@ -378,14 +382,14 @@ void book_room()
 
     printf("Enter the room type (single/double): ");
     scanf("%[^\n]s", type);
-    getchar(); 
+    getchar();
 
     // Filter by type and store it in custom local array
     for (int i = 0; i < roomCount; i++)
     {
         if (hotelRooms[i].isOccupied == 0 && strcmp(hotelRooms[i].type, type) == 0)
         {
-            foundroom[foundcount++] = i;// adding all required type to foundroom
+            foundroom[foundcount++] = i; // adding all required type to foundroom
         }
     }
 
@@ -400,7 +404,7 @@ void book_room()
         {
             for (int j = i; j < foundcount - 1; j++)
             {
-                foundroom[j] = foundroom[j + 1]; // match shara gulo remove 
+                foundroom[j] = foundroom[j + 1]; // match shara gulo remove
             }
             foundcount--;
         }
@@ -509,7 +513,8 @@ void book_room()
                     scanf("%[^\n]s", c[j].checkOutDate);
                     getchar();
                     c[j].roomNumber = roomNumber;
-                    int totalPrice = calculatePrice(&hotelRooms[foundroom[i]], stayDuration, month);
+                    c[j].base_price = hotelRooms[idx].basePrice;
+                    c[j].total_price = calculatePrice(&hotelRooms[foundroom[i]], stayDuration, month);
                     hotelRooms[foundroom[i]].isOccupied = 1;
                     // printf("Mr/Ms %s. You room %d have successfully been booked! \nTotal price for %d days is: %d\n",
                     //        c[j].name, roomNumber, stayDuration, totalPrice);
@@ -517,23 +522,23 @@ void book_room()
                     printf("************************************************************************\n");
                     printf("         Dear %s, \n", c[j].name);
                     printf("         Your booking for room number %d \n", roomNumber);
-                    printf("         The total price for your stay of %d days is: %d \n", stayDuration, totalPrice);
+                    printf("         The total price for your stay of %d days is: %d \n", stayDuration, c[j].total_price);
                     printf("         Thank you for choosing our hotel. We look forward to your stay.\n");
                     printf("************************************************************************\n");
-                    printf("\n\n\n");
+                    printf("\n");
+                    printf("\t\t\tYour bill have been printed\n\n\n");
+                    print_bill(j);
                     userCount++;
                     break;
                 }
             }
             break;
         }
-        
     }
     if (room_found == 0 && foundcount != 0)
     {
         printf("The given room doesn't meet your requirement.\n");
     }
-
 }
 
 int calculatePrice(Room *room, int stayDuration, int month)
@@ -572,8 +577,6 @@ int isPeakSeason(int month)
     return 0;
 }
 
-
-
 void checkout()
 {
     int roomNumber = 0;
@@ -597,7 +600,6 @@ void checkout()
     }
 }
 
-
 void save_Room_Details_data()
 {
     FILE *file = fopen("Room_details.txt", "w");
@@ -615,7 +617,7 @@ void save_Room_Details_data()
         return;
     }
 
-    // Print headers for console display
+    // Print room data for console debuger jono
     // printf("----------------------------------------------------------------------------------------\n");
     // printf("| Room Number  | Floor | Type      | View      | AC Type      | Base Price | Occupied |\n");
     // printf("----------------------------------------------------------------------------------------\n");
@@ -695,7 +697,7 @@ void save_book_users_data()
     if (userCount == 0)
     {
         printf("No users have booked rooms.\n");
-        fprintf(file, "No users have booked rooms.\n");
+        // fprintf(file, "No users have booked rooms.\n");
         fclose(file);
         return;
     }
@@ -749,6 +751,45 @@ void display_book_users_data()
     fclose(file);
 }
 
+void print_bill(int i)
+{
+    FILE *file = fopen("Print Bill.txt", "w");
+    // Write the invoice data to the file
+    fprintf(file, "Hotel %s\n", HOTEL_NAME);
+    fprintf(file, "Address: %s\n", HOTEL_ADDRESS);
+    fprintf(file, "Phone: %s\n", HOTEL_PHONE);
+    fprintf(file, "Email: %s\n\n", HOTEL_EMAIL);
+
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "              Guest Invoice\n");
+    fprintf(file, "-------------------------------------\n\n");
+
+    fprintf(file, "Guest Name: %s\n", c[i].name);
+    fprintf(file, "Phone Number: %s\n", c[i].phoneNumber);
+    fprintf(file, "Email: %s\n", c[i].email);
+    fprintf(file, "Address: %s\n", c[i].address);
+    fprintf(file, "Room Number: %d\n\n", c[i].roomNumber);
+
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "Description           Rate (per night)  Nights Stayed  Amount (BDT)\n");
+    fprintf(file, "Room Rent (Standard)  3,000             4              %d\n", c[i].base_price);
+    fprintf(file, "Service Charge (5%)                                        600\n");
+    fprintf(file, "VAT (10%)                                                1,260\n");
+    fprintf(file, "Additional Charges                                       0\n");
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "Total Amount (BDT):                                     %d\n\n", c[i].total_price);
+
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "Check-in Date: %s\n", c[i].checkInDate);
+    fprintf(file, "Check-out Date: %s\n", c[i].checkOutDate);
+    fprintf(file, "Payment Method: Cash/Card\n\n");
+
+    fprintf(file, "-------------------------------------\n");
+    fprintf(file, "Thank you for staying with us!\n");
+    fprintf(file, "We look forward to welcoming you again.\n");
+    fprintf(file, "-------------------------------------\n");
+    fclose(file);
+}
 
 // By sAhAf🙂
 

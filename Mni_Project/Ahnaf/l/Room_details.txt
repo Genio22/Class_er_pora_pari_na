@@ -20,7 +20,7 @@
 | 204          | 2     | double    | City View    | Non AC Room  | 1500       | No       |
 | 205          | 2     | deluxe    | City View    | Non AC Room  | 3000       | No       |
 | 206          | 2     | double    | City View    | AC Room      | 1000       | No       |
-| 207          | 2     | single    | Sea View     | AC Room      | 3000       | No       |
+| 207          | 2     | single    | Sea View     | AC Room      | 3000       | Yes      |
 | 208          | 2     | double    | Sea View     | AC Room      | 5000       | No       |
 | 209          | 2     | deluxe    | City View    | AC Room      | 3000       | No       |
 | 210          | 2     | single    | City View    | Non AC Room  | 1350       | No       |

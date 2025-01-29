@@ -1,5 +1,5 @@
 /* Create a structure called ”Student” with members name, age, and total marks. Write a C program
-to input data fortwo students, display theirinformation, and find the average oftotal marks. */
+to input data for two students, display their information, and find the average of total marks. */
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
@@ -37,7 +37,8 @@ int main()
     {
         printf("Enter details for student: %d\n", i + 1);
         printf("Name: ");
-        fgets(s[i].name, 100, stdin);
+        scanf("%[^\n]s", s[i].name);
+        getchar();
         printf("Age: ");
         scanf("%d", &s[i].age);
         getchar();

@@ -339,7 +339,7 @@ void AddRoom()
         printf("Enter Floor: ");
         scanf("%d", &floor);
         getchar();
-        printf("Enter Room Type (e.g., Single, Double, Deluxe): ");
+        printf("Enter Room Type (e.g., Single, Double): ");
         scanf("%[^\n]s", type);
         getchar();
         printf("Enter View (e.g., Sea, City): ");
@@ -821,7 +821,7 @@ void save_book_users_data()
     // fprintf(file, "| Name              | Phone Number    | Email                | Address         | ID Type    | ID Number  | Room Number  | Check-in Date   | Check-out Date  |\n");
 
     // printf("------------------------------------------------------------\n");
-    // printf("| Name              | Phone Number    | Email                      | Address         | ID Type    | ID Number  | Room Number  | Check-in Date   | Check-out Date  |\n");
+    // printf("| Name              | Phone Number    | Email                | Address         | ID Type    | ID Number  | Room Number  | Check-in Date   | Check-out Date  |\n");
     // By sAhAf🙂
 
     if (userCount == 0)
@@ -865,8 +865,8 @@ void display_book_users_data()
     }
 
     char line[256];
-    printf("|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n");
-    printf("| Name            | Phone Number   | Email                     | Address                   | ID Type      | ID Number     | Room Number | Check-in Date | Check-out Date |\n");
+    printf("|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n");
+    printf("| Name              | Phone Number   | Email                     | Address                    | ID Type    | ID Number     | Room Number   | Check-in Date   | Check-out Date  |\n");
     // printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
     // line diya full 1 block array access

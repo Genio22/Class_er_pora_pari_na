@@ -54,7 +54,7 @@ int roomCount = 0, userCount = 0;
 void print_logo();
 
 // Login and it menu type
-int login(char *username, char *password);
+int login(const char *username, const char *password);
 void showAdminMenu();
 void showUserMenu();
 
@@ -182,10 +182,10 @@ int main()
                 printf("Access denied. Only Admin can add rooms.\n");
             }
             break;
-        case 4: 
+        case 4:
             book_room();
             break;
-        case 5: 
+        case 5:
             if (loginType == 1)
             {
                 editBookingDetails();
@@ -203,8 +203,9 @@ int main()
             {
                 printf("Access denied. Only Admin can perform checkout.\n");
             }
+            display_book_users_data();
             break;
-        case 7:// Exit
+        case 7: // Exit
             printf("Exiting the system. Goodbye!\n");
             save_book_users_data();
             save_Room_Details_data();
@@ -242,7 +243,7 @@ void print_logo()
 // By sAhAf🙂
 
 // admin and user login interfage
-int login(char *username, char *password)
+int login(const char *username, const char *password)
 {
     char inputUsername[20], inputPassword[20];
 
@@ -339,7 +340,7 @@ void AddRoom()
         printf("Enter Floor: ");
         scanf("%d", &floor);
         getchar();
-        printf("Enter Room Type (e.g., Single, Double, Deluxe): ");
+        printf("Enter Room Type (e.g., Single, Double): ");
         scanf("%[^\n]s", type);
         getchar();
         printf("Enter View (e.g., Sea, City): ");
@@ -585,7 +586,7 @@ void book_room()
                     c[j].roomNumber = roomNumber;
                     c[j].base_price = hotelRooms[idx].basePrice;
                     c[j].total_price = calculatePrice(&hotelRooms[foundroom[i]], stayDuration, month);
-                    hotelRooms[foundroom[i]].isOccupied = 1;
+                    hotelRooms[i].isOccupied = 1;
                     // printf("Mr/Ms %s. You room %d have successfully been booked! \nTotal price for %d days is: %d\n",
                     //        c[j].name, roomNumber, stayDuration, totalPrice);
                     printf("\n\n\n");
@@ -652,7 +653,7 @@ void editBookingDetails()
     int roomNumber;
     printf("Enter the room number of the booking to edit: ");
     scanf("%d", &roomNumber);
-    getchar(); 
+    getchar();
 
     // Find the customer by room number
     int index = -1;
@@ -821,7 +822,7 @@ void save_book_users_data()
     // fprintf(file, "| Name              | Phone Number    | Email                | Address         | ID Type    | ID Number  | Room Number  | Check-in Date   | Check-out Date  |\n");
 
     // printf("------------------------------------------------------------\n");
-    // printf("| Name              | Phone Number    | Email                      | Address         | ID Type    | ID Number  | Room Number  | Check-in Date   | Check-out Date  |\n");
+    // printf("| Name              | Phone Number    | Email                | Address         | ID Type    | ID Number  | Room Number  | Check-in Date   | Check-out Date  |\n");
     // By sAhAf🙂
 
     if (userCount == 0)
@@ -865,8 +866,8 @@ void display_book_users_data()
     }
 
     char line[256];
-    printf("|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n");
-    printf("| Name            | Phone Number   | Email                     | Address                   | ID Type      | ID Number     | Room Number | Check-in Date | Check-out Date |\n");
+    printf("|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n");
+    printf("| Name              | Phone Number   | Email                     | Address                    | ID Type    | ID Number     | Room Number   | Check-in Date   | Check-out Date  |\n");
     // printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
     // line diya full 1 block array access

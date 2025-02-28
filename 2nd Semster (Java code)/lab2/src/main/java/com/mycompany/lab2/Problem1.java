@@ -1,4 +1,3 @@
-
 package com.mycompany.lab2;
 
 import java.util.Scanner;
@@ -6,8 +5,8 @@ import java.util.Scanner;
 /*
  * To Find out if a character is a vowel or consonant.
  */
-
 public class Problem1 {
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter a characer: ");
@@ -22,5 +21,6 @@ public class Problem1 {
         } else {
             System.out.println("'" + ch + "' is not a letter.");
         }
+        in.close();
     }
 }

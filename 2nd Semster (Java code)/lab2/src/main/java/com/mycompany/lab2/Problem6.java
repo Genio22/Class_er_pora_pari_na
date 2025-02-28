@@ -27,6 +27,8 @@ public class Problem6 {
             System.out.println("It is a equilateral triangle");
         } else {
             System.out.println("It is not a triangle");
+
         }
+        in.close();
     }
 }

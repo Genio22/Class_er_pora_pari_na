@@ -1,11 +1,12 @@
-
 package com.mycompany.lab2;
 
 import java.util.Scanner;
+
 /*
  * Finds if 3 arms(from console) can make a triangle or not.
  */
 public class Problem2 {
+
     public static void main(String[] args) {
         Scanner input;
         input = new Scanner(System.in);
@@ -18,12 +19,12 @@ public class Problem2 {
         System.out.print("-> ");
         c = input.nextDouble();
         boolean d = (a + b > c) && (b + c > a) && (c + a > b);
-        if (d){
+        if (d) {
             System.out.println("It is a triangle");
-        }
-        else{
+        } else {
             System.out.println("It is not a triangle");
         }
+        input.close();
 
     }
 }

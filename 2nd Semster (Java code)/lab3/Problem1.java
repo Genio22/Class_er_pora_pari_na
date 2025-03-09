@@ -24,5 +24,6 @@ public class Problem1 {
         }
         System.out.println("Sum: " + sum);
         in.close();
+
     }
 }

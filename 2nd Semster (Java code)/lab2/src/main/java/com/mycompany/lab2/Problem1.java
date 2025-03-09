@@ -8,9 +8,9 @@ import java.util.Scanner;
 public class Problem1 {
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.print("Enter a characer: ");
-        char ch = in.next().charAt(0);
+        char ch = input.next().charAt(0);
         boolean a = Character.isLetter(ch);
         if (a) {
             if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
@@ -21,6 +21,6 @@ public class Problem1 {
         } else {
             System.out.println("'" + ch + "' is not a letter.");
         }
-        in.close();
+        input.close();
     }
 }

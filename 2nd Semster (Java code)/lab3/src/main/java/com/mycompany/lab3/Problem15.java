@@ -24,17 +24,14 @@ public class Problem15 {
         System.out.println("Monthly Payment: " + M);
         System.out.println("Total Payment: " + (M * 12));
         double balance = lon;
-        System.out.println("Payment#         Interest            Principal            Balance\n");
+        System.out.println("Payment#         Interest         Principal        Balance\n");
         for (int i = 1; i <= time * 12; i++) {
             double inter = balance * r;
-
             double principal = M - inter;
-
             balance -= principal;
-
-            System.out.println(i + "         " + inter + "        " + principal + "       " + balance);
-
+            System.out.printf("%7d %15.2f %15.2f %17.2f\n", i, inter, principal, balance);
         }
+
         //System.out.println(M);
     }
 }

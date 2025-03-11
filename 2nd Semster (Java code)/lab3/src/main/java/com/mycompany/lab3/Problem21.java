@@ -3,7 +3,8 @@ package com.mycompany.lab3;
 import java.util.Scanner;
 
 /**
- *
+ * Find the odd and even numbers in an array and save them in two different
+ * arrays.
  */
 public class Problem21 {
 

@@ -15,6 +15,7 @@ public class Problem6 {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter a number for factorial: ");
         int p = in.nextInt();
+        in.close();
         int mul = 1;
         switch (p) {
             case 0:

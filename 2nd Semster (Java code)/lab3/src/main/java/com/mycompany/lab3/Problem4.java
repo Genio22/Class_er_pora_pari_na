@@ -16,6 +16,7 @@ public class Problem4 {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter num 1: ");
         int m = in.nextInt();
+        in.close();
         System.out.print("Enter num 2: ");
         int n = in.nextInt();
         int[] a = new int[30];

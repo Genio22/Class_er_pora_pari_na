@@ -16,6 +16,7 @@ public class Problem5 {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter num 1: ");
         int n = in.nextInt();
+        in.close();
         for (int i = 0; i <= 10; i++) {
             System.out.printf("%d X %d = %d\n", n, i, n * i);
         }

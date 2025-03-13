@@ -11,6 +11,7 @@ public class Problem21 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.print("Size: ");
+        in.close();
         int b = in.nextInt();
         int[] a = new int[b];
         int[] c = new int[b];

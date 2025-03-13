@@ -15,6 +15,7 @@ public class Problem1 {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter a number: ");
         int num = in.nextInt();
+        in.close();
         int sum = 0;
         int a = 1;
         while (a != 0) {
@@ -23,6 +24,6 @@ public class Problem1 {
             num = num / 10;
         }
         System.out.println("Sum: " + sum);
-        in.close();
+
     }
 }

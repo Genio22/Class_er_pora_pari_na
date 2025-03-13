@@ -17,6 +17,7 @@ public class Problem7 {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter the number to reverse: ");
         int a = in.nextInt();
+        in.close();
         System.out.print("\n\nOriginal: " + a);
         int b = 1;
         System.out.print("\nModified: ");

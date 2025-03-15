@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Code Visualizer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="js/codemirror/codemirror.css">
+</head>
+<body>
+    <h1>Java Code Visualizer</h1>
+    <form id="codeForm">
+        <textarea id="javaCode" name="javaCode">
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+        </textarea><br>
+        <button type="submit">Visualize Code</button>
+    </form>
+    <div id="result">
+        <!-- The visualization result will be displayed here -->
+    </div>
+    <script src="js/codemirror/codemirror.js"></script>
+    <script src="js/codemirror/mode/clike/clike.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,44 +1,22 @@
 from flask import Flask, request, jsonify, send_from_directory
-import javalang
-import graphviz
-import base64
-from io import BytesIO
+import subprocess
+import os
 
 app = Flask(__name__, static_url_path='', static_folder='../static')
 
-def parse_java_code(code):
-    tree = javalang.parse.parse(code)
-    return tree
-
-def visualize_ast(tree):
-    dot = graphviz.Digraph(comment='Java AST')
+def compile_and_run_java(code, input_data):
+    with open("Main.java", "w") as file:
+        file.write(code)
     
-    def add_nodes(node, parent_id=None):
-        node_id = str(id(node))
-        label = type(node).__name__
-        
-        if hasattr(node, 'name'):
-            label += f' ({node.name})'
-        
-        dot.node(node_id, label)
-        
-        if parent_id:
-            dot.edge(parent_id, node_id)
-        
-        if isinstance(node, javalang.ast.Node):
-            children = node.children
-            if callable(children):
-                children = children()
-            for child in children:
-                if isinstance(child, javalang.ast.Node):
-                    add_nodes(child, node_id)
-                elif isinstance(child, list):
-                    for grandchild in child:
-                        if isinstance(grandchild, javalang.ast.Node):
-                            add_nodes(grandchild, node_id)
+    compile_process = subprocess.run(["javac", "Main.java"], capture_output=True, text=True)
+    if compile_process.returncode != 0:
+        return compile_process.stderr
     
-    add_nodes(tree)
-    return dot
+    run_process = subprocess.run(["java", "Main"], input=input_data, capture_output=True, text=True)
+    if run_process.returncode != 0:
+        return run_process.stderr
+    
+    return run_process.stdout
 
 @app.route('/')
 def serve_index():
@@ -48,13 +26,11 @@ def serve_index():
 def process_code():
     data = request.get_json()
     code = data['code']
+    input_data = data.get('input', '')
     
-    tree = parse_java_code(code)
-    dot = visualize_ast(tree)
-    img = dot.pipe(format='png')
-    img_base64 = base64.b64encode(img).decode('utf-8')
+    output = compile_and_run_java(code, input_data)
     
-    return jsonify({'image': img_base64})
+    return jsonify({'output': output})
 
 if __name__ == '__main__':
     app.run(debug=True)

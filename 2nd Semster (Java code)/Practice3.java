@@ -15,19 +15,17 @@ package com.mycompany.practice;
  */
 import java.util.Scanner;
 
-public class Practice {
+public class Practice3 {
 
     public static boolean check_pass(String pass) {
 
         int b = 0;
         //boolean passok = false;
-        // rule 1
         if (pass.length() < 8) {
             System.out.println("Pass must be 8 character.");
             return false;
         }
-        // rule 2
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < pass.length(); i++) {
             if (!Character.isLetterOrDigit(pass.charAt(i))) {
                 System.out.println("Pass can not have any thing else but alphabate and digit");
                 return false;
@@ -37,8 +35,8 @@ public class Practice {
             }
 
         }
-        // rule 3
-        if (b != 2) {
+
+        if (b < 2) {
             System.out.println("Pass must contain atleast 2 digit");
             return false;
 

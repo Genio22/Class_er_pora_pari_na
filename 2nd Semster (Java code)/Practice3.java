@@ -21,10 +21,12 @@ public class Practice {
 
         int b = 0;
         //boolean passok = false;
+        // rule 1
         if (pass.length() < 8) {
             System.out.println("Pass must be 8 character.");
             return false;
         }
+        // rule 2
         for (int i = 0; i < 8; i++) {
             if (!Character.isLetterOrDigit(pass.charAt(i))) {
                 System.out.println("Pass can not have any thing else but alphabate and digit");
@@ -35,7 +37,7 @@ public class Practice {
             }
 
         }
-
+        // rule 3
         if (b != 2) {
             System.out.println("Pass must contain atleast 2 digit");
             return false;

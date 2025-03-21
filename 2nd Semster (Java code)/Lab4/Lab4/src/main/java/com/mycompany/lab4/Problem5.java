@@ -19,6 +19,7 @@ public class Problem5 {
                 sum += mat1[i][j];
             }
         }
+
         System.out.println("Sum: " + sum);
     }
 
@@ -35,5 +36,6 @@ public class Problem5 {
             }
         }
         array_sum(rows, cols, mat1);
+
     }
 }

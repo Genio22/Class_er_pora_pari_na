@@ -1,0 +1,407 @@
+{
+    
+
+
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    
+    "version": "0.2.0",
+    "terminal.integrated.profiles.windows": {
+    "Command Prompt": {
+        "path": "C:\\Windows\\System32\\cmd.exe"
+    }
+},
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Problem6",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem6",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Problem5",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem5",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Problem4",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem4",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Problem3",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem3",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Problem2",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem2",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Problem1",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem1",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "hi",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab4.hi",
+            "projectName": "Lab4"
+        },
+        {
+            "name": "Java",
+            "type": "java",
+            "request": "launch",
+            "stopOnEntry": true,
+            "jdkPath": "${env:JAVA_HOME}/bin",
+            "cwd": "${fileDirname}",
+            "startupClass": "${fileBasenameNoExtension}",
+            "classpath": [
+                ".",
+                "${fileDirname}"
+            ]
+        },
+        {
+            "name": "Java Console App",
+            "type": "java",
+            "request": "launch",
+            "stopOnEntry": true,
+            "jdkPath": "${env:JAVA_HOME}/bin",
+            "cwd": "${fileDirname}",
+            "startupClass": "${fileBasenameNoExtension}",
+            "classpath": [
+                ".",
+                "${fileDirname}"
+            ],
+            "externalConsole": true
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Problem1",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem1",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem10",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem10",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem11",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem11",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem12",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem12",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem13",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem13",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem14",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem14",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem2",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem2",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem3",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem3",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem4",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem4",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem5",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem5",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem6",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem6",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem7",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem7",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem8",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem8",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Problem9",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab2.Problem9",
+            "projectName": "Lab2"
+        },
+        {
+            "type": "java",
+            "name": "Lab4",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab4.Lab4",
+            "projectName": "Lab4"
+        },
+        {
+            "type": "java",
+            "name": "Problem1(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab4.Problem1",
+            "projectName": "Lab4"
+        },
+        {
+            "type": "java",
+            "name": "Problem2(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab4.Problem2",
+            "projectName": "Lab4"
+        },
+        {
+            "type": "java",
+            "name": "Problem3(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab4.Problem3",
+            "projectName": "Lab4"
+        },
+        {
+            "type": "java",
+            "name": "Problem4(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab4.Problem4",
+            "projectName": "Lab4"
+        },
+        {
+            "type": "java",
+            "name": "Problem5(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab4.Problem5",
+            "projectName": "Lab4"
+        },
+        {
+            "type": "java",
+            "name": "Problem6(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab4.Problem6",
+            "projectName": "Lab4"
+        },
+        {
+            "type": "java",
+            "name": "Lab3",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Lab3",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem1(2)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem1",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem10(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem10",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem11(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem11",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem12(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem12",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem13(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem13",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem14(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem14",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem15",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem15",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem16",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem16",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem17",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem17",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem18",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem18",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem19",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem19",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem2(2)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem2",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem20",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem20",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem21",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem21",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem3(2)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem3",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem4(2)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem4",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem5(2)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem5",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem6(2)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem6",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem7(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem7",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem8(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem8",
+            "projectName": "lab3"
+        },
+        {
+            "type": "java",
+            "name": "Problem9(1)",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab3.Problem9",
+            "projectName": "lab3"
+        }
+    ]
+}

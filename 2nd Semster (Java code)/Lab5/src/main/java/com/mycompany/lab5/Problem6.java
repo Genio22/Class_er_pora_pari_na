@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author ahnaf
  */
 public class Problem6 {
-    
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("Size: ");
@@ -48,4 +48,5 @@ public class Problem6 {
             System.out.println(elem);
         }
     }
+
 }

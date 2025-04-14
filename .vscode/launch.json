@@ -5,6 +5,55 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Problem7",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem7",
+            "projectName": "Lab5"
+        },
+        {
+            "type": "java",
+            "name": "Problem6",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem6",
+            "projectName": "Lab5"
+        },
+        {
+            "type": "java",
+            "name": "Problem5",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem5",
+            "projectName": "Lab5"
+        },
+        {
+            "type": "java",
+            "name": "Problem4",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem4",
+            "projectName": "Lab5"
+        },
+        {
+            "type": "java",
+            "name": "Problem3",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem3",
+            "projectName": "Lab5"
+        },
+        {
+            "type": "java",
+            "name": "Problem2",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem2",
+            "projectName": "Lab5"
+        },
+        {
+            "type": "java",
+            "name": "Problem1",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab5.Problem1",
+            "projectName": "Lab5"
+        },
+        {
             "name": "C/C++: gcc.exe build and debug active file",
             "type": "cppdbg",
             "request": "launch",

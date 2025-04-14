@@ -4,6 +4,8 @@
  */
 package com.mycompany.lab5;
 
+import java.util.Arrays;
+
 import java.util.Scanner;
 
 /**
@@ -23,30 +25,36 @@ public class Problem6 {
             arr[i] = in.nextInt();
         }
 
-        // Array to keep track of visit elements
-        boolean[] visit = new boolean[size];
+        int[] uniqueNumbers = eliminateDuplicates(arr);
 
-        System.out.println("Element counts: ");
-
-        for (int i = 0; i < size; i++) {
-            if (!visit[i]) {
-                int count = 1;
-                for (int j = i + 1; j < size; j++) {
-                    if (arr[i] == arr[j]) {
-                        visit[j] = true;
-                        arr[i] = -1;
-                    }
-                }
-            }
-        }
-        for (int i = 0; i < size; i++) {
-            if (arr[i] == -1 || arr[i] == arr[i + 1]) {
-                arr[i] = arr[i + 1];
-            }
-        }
-        for (Object elem : arr) {
-            System.out.println(elem);
-        }
+        System.out.println("Original array: " + Arrays.toString(arr));
+        System.out.println("Array after removing duplicates: " + Arrays.toString(uniqueNumbers));
     }
 
+    public static int[] eliminateDuplicates(int[] list) {
+        int n = list.length;
+        int[] temp = new int[n];
+        int newSize = 0;          // Tracks the size of unique elements
+
+        for (int i = 0; i < n; i++) {
+            boolean isDuplicate = false;
+            // Check if list[i] already exists in temp
+            for (int j = 0; j < newSize; j++) {
+                if (list[i] == temp[j]) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            // If not a duplicate, add it to temp
+            if (!isDuplicate) {
+                temp[newSize++] = list[i];
+            }
+        }
+
+        // Create the final array of exact size
+        int[] uniqueArray = new int[newSize];
+        System.arraycopy(temp, 0, uniqueArray, 0, newSize);
+
+        return uniqueArray;
+    }
 }

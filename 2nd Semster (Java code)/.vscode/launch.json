@@ -15,6 +15,55 @@
     "configurations": [
         {
             "type": "java",
+            "name": "C_Problem6",
+            "request": "launch",
+            "mainClass": "com.mycompany.practice_problems.C_Problem6",
+            "projectName": "Practice_Problems"
+        },
+        {
+            "type": "java",
+            "name": "C_Problem5",
+            "request": "launch",
+            "mainClass": "com.mycompany.practice_problems.C_Problem5",
+            "projectName": "Practice_Problems"
+        },
+        {
+            "type": "java",
+            "name": "Problem5",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab6.Problem5",
+            "projectName": "Lab6"
+        },
+        {
+            "type": "java",
+            "name": "Problem4",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab6.Problem4",
+            "projectName": "Lab6"
+        },
+        {
+            "type": "java",
+            "name": "Problem6",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab6.Problem6",
+            "projectName": "Lab6"
+        },
+        {
+            "type": "java",
+            "name": "Problem3",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab6.Problem3",
+            "projectName": "Lab6"
+        },
+        {
+            "type": "java",
+            "name": "Problem2",
+            "request": "launch",
+            "mainClass": "com.mycompany.lab6.Problem2",
+            "projectName": "Lab6"
+        },
+        {
+            "type": "java",
             "name": "C_Problem4",
             "request": "launch",
             "mainClass": "com.mycompany.practice_problems.C_Problem4",

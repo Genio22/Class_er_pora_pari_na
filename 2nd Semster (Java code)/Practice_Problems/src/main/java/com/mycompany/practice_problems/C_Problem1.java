@@ -14,7 +14,7 @@ public class C_Problem1 {
 
 class Vehicle {
 
-    void run() {
+    static void run() {
         System.out.println("Vehicle is runing");
     }
 }
@@ -22,7 +22,7 @@ class Vehicle {
 class Car extends Vehicle {
 
     @Override
-    void run() {
+    static void run() {
         System.out.println("Car is running safely");
     }
 }

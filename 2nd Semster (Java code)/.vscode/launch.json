@@ -15,6 +15,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "C_Problem8",
+            "request": "launch",
+            "mainClass": "com.mycompany.practice_problems.C_Problem8",
+            "projectName": "Practice_Problems"
+        },
+        {
+            "type": "java",
+            "name": "C_Problem7",
+            "request": "launch",
+            "mainClass": "com.mycompany.practice_problems.C_Problem7",
+            "projectName": "Practice_Problems"
+        },
+        {
+            "type": "java",
             "name": "C_Problem6",
             "request": "launch",
             "mainClass": "com.mycompany.practice_problems.C_Problem6",

@@ -113,4 +113,4 @@ select * from course_2024360449 where dept_name = 'Biology' and credits != 4;
 
 
 
-@ C:\Users\Student.DBLAB12\Documents\Ahnaf_CODE\1.sql;
+@ C:\Users\Student\Documents\Ahnaf_Code\2024-3-60-449_LAB01.sql;

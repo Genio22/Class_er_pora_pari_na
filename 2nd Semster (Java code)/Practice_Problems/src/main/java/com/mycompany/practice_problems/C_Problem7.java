@@ -42,7 +42,7 @@ interface Speaker {
 
 interface Walker {
 
-    default void walk();
+    void walk();
 }
 
 class AIHumanoid extends Robot implements Speaker, Walker {
@@ -57,7 +57,8 @@ class AIHumanoid extends Robot implements Speaker, Walker {
         System.out.println("Hello everyone.");
     }
 
-    default void walk() {
+    @Override
+    public void walk() {
         System.out.println("Initiating walking...");
     }
 }

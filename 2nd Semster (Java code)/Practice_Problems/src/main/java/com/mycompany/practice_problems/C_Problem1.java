@@ -21,7 +21,6 @@ class Vehicle {
 
 class Car extends Vehicle {
 
-    @Override
     static void run() {
         System.out.println("Car is running safely");
     }

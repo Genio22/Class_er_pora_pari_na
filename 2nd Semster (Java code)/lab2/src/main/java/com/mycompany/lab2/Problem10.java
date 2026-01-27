@@ -22,5 +22,6 @@ public class Problem10 {
 
         System.out.println("Area: " + area);
         System.out.println("Perimeter: " + perimeter);
+        input.close();
     }
 }

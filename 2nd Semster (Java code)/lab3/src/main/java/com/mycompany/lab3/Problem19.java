@@ -27,6 +27,7 @@ public class Problem19 {
                 System.out.println(a[i]);
             }
         }
+        in.close();
     }
 
 }

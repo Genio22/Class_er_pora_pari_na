@@ -73,7 +73,7 @@ select name from instructor_2024360449;
 
 --3 ii)
 
-select course_id, title from course_id;
+select course_id, title from course_2024360449;
 
 --3 iii)
 
@@ -85,8 +85,28 @@ select title, credits from course_2024360449 where dept_name = 'Comp. Sci';
 
 --3 v)
  
- select name dept_name from instructor_2024360449 where salary 
+select name, dept_name from instructor_2024360449 where salary > 70000;
 
+--3 vi)
+
+select title from course_2024360449 where credits > 3; -- not less than 4 == 'credits > 3' or 'credits >= 4'
+
+--3 vii)
+
+select name, dept_name from instructor_2024360449 where salary between 80000 and 100000;
+
+--3 viii)
+
+select title, credits from course_2024360449 where dept_name <> 'Comp. Sci' or dept_name is null; 
+-- '<>', '!=' -> not equal to, '<>' do not reture the row with null so use or to add that case here.
+
+--3 ix)
+
+select * from instructor_2024360449;
+
+--3 x)
+
+select * from course_2024360449 where dept_name = 'Biology' and credits != 4;
 
 
 

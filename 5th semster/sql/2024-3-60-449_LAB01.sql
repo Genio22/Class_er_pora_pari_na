@@ -79,7 +79,7 @@ select name, dept_name from instructor_2024360449 where id = 22222;
 
 --3 iv)
 
-select title, credits from course_2024360449 where dept_name = 'Comp. Sci';
+select title, credits from course_2024360449 where dept_name = 'Comp. Sci.';
 
 --3 v)
  

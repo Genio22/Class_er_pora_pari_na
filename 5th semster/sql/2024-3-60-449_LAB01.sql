@@ -6,7 +6,7 @@ create user ahnaf identified by ahnaf;
 
 grant resource, connect, create session, create table, create view, create any trigger,create any procedure,create sequence, create synonym, unlimited tablespace to ahnaf; 
 
-sqlplus ahnaf/ahnaf@//localhost:1521/XEPDB1;
+--sqlplus ahnaf/ahnaf@//localhost:1521/XEPDB1;
 
 SET LINESIZE 200
 SET PAGESIZE 100

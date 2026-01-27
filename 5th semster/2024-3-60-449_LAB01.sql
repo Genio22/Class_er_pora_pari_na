@@ -5,12 +5,16 @@ grant resource, connect, create session, create table, create view, create any t
 
 connect ahnaf/ahnaf;
 
+--1 a)
+
 create table instructor_2024360449(
     id number,
     name varchar2(50),
     dept_name varchar2(50),
     salary number
 );
+
+--1 b)
 
 create table course_2024360449(
     course_id varchar2(50),
@@ -20,18 +24,36 @@ create table course_2024360449(
 );
 
 
+--2 a)
+
+INSERT INTO instructor_2024360449 VALUES (10101, 'Srinivasan', 'Comp. Sci.', 65000),
+INSERT INTO instructor_2024360449 VALUES (12121, 'Wu', 'Finance', 90000),
+INSERT INTO instructor_2024360449 VALUES (15151, 'Mozart', 'Music', 40000),
+INSERT INTO instructor_2024360449 VALUES (22222, 'Einstein', 'Physics', 95000),
+INSERT INTO instructor_2024360449 VALUES (32343, 'El Said', 'History', 60000),
+INSERT INTO instructor_2024360449 VALUES (33456, 'Gold', 'Physics', 87000),
+INSERT INTO instructor_2024360449 VALUES (45565, 'Katz', 'Comp. Sci.', 75000),
+INSERT INTO instructor_2024360449 VALUES (58583, 'Califieri', 'History', 62000),
+INSERT INTO instructor_2024360449 VALUES (76543, 'Singh', 'Finance', 80000),
+INSERT INTO instructor_2024360449 VALUES (76766, 'Crick', 'Biology', 72000),
+INSERT INTO instructor_2024360449 VALUES (83821, 'Brandt', 'Comp. Sci.', 92000),
+INSERT INTO instructor_2024360449 VALUES (98345, 'Kim', 'Elec. Eng.', 80000);
 
 
--- insert into person1 values (2018002, 'Bob', '01-Jan-92');
--- insert into person1 values (2018003, 'Steve', '01-Jan-93');
--- insert into person1 values (2018004, 'Elsa', '01-Jan-94');
--- insert into person1 values (2018005, 'Ahana', '01-Jan-95');
--- insert into person1 values (2018006, 'Jakson', '01-Jan-96');
--- insert into person1 values (2018007, 'Harve', '01-Jan-97');
--- insert into person1 values (2018008, 'Robart', '01-Jan-98');
+
+INSERT INTO course_2024360449 VALUES
 
 
-select * from person1;
+
+
+
+
+
+
+
+
+
+select * from instructor_2024360449;
 
 
 

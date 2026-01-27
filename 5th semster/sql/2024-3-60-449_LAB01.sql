@@ -1,8 +1,12 @@
+
+-- for 21c user create
+ALTER SESSION SET CONTAINER = XEPDB1;
+
 create user ahnaf identified by ahnaf;
 
 grant resource, connect, create session, create table, create view, create any trigger,create any procedure,create sequence, create synonym, unlimited tablespace to ahnaf; 
 
-connect ahnaf/ahnaf;
+sqlplus ahnaf/ahnaf@//localhost:1521/XEPDB1;
 
 SET LINESIZE 200
 SET PAGESIZE 100
@@ -111,14 +115,4 @@ select * from course_2024360449 where dept_name = 'Biology' and credits != 4;
 
 
 
-@ C:\Users\Student\Documents\Ahnaf_Code\2024-3-60-449_LAB01.sql;
-
-
-
-
-
-
-
-
-
-
+--@ C:\Users\ahnaf\Downloads\Compressed\Ahnaf_Code\Ahnaf_Code\2024-3-60-449_LAB01.sql;

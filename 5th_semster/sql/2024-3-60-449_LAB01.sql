@@ -1,12 +1,15 @@
 
 -- for 21c user create
-ALTER SESSION SET CONTAINER = XEPDB1;
+-- ALTER SESSION SET CONTAINER = XEPDB1;
 
 create user ahnaf identified by ahnaf;
 
 grant resource, connect, create session, create table, create view, create any trigger,create any procedure,create sequence, create synonym, unlimited tablespace to ahnaf; 
 
 --sqlplus ahnaf/ahnaf@//localhost:1521/XEPDB1;
+
+-- To connect as ahnaf user using sqlplus in terminal of ubuntu.
+-- CONNECT ahnaf/ahnaf@//localhost:1521/XEPDB1;
 
 SET LINESIZE 200
 SET PAGESIZE 100
@@ -116,3 +119,4 @@ select * from course_2024360449 where dept_name = 'Biology' and credits != 4;
 
 
 --@ C:\Users\ahnaf\Downloads\Compressed\Ahnaf_Code\Ahnaf_Code\2024-3-60-449_LAB01.sql;
+--@ /home/ahnaf/Documents/Class_er_pora_pari_na/5th_semster/sql/2024-3-60-449_LAB01.sql;

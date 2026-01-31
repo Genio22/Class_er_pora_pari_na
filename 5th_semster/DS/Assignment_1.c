@@ -524,7 +524,7 @@ int main()
 
     init(&list);
 
-    printf("=== ADD BEGIN ===\n");
+    printf("========== ADD BEGIN ===\n");
     addbegin(10, &head);
     arr_addbegin(10, &list);
 
@@ -538,7 +538,7 @@ int main()
     arr_display(&list);
 
 
-    printf("\n=== ADD END ===\n");
+    printf("\n======== ADD END ===\n");
     add(5, &head);
     arr_add(5, &list);
 
@@ -546,7 +546,7 @@ int main()
     arr_display(&list);
 
 
-    printf("\n=== ADD ANY POSITION ===\n");
+    printf("\n======= ADD ANY POSITION ===\n");
     addanypos(2, 99, &head);
     arr_addanypos(2, 99, &list);
 
@@ -554,7 +554,7 @@ int main()
     arr_display(&list);
 
 
-    printf("\n=== REMOVE FIRST ===\n");
+    printf("\n======= REMOVE FIRST ===\n");
     removefirst(&head);
     arr_removefirst(&list);
 
@@ -562,7 +562,7 @@ int main()
     arr_display(&list);
 
 
-    printf("\n=== REMOVE LAST ===\n");
+    printf("\n======= REMOVE LAST ===\n");
     removelast(&head);
     arr_removelast(&list);
 
@@ -570,7 +570,7 @@ int main()
     arr_display(&list);
 
 
-    printf("\n=== REMOVE POSITION 1 ===\n");
+    printf("\n======= REMOVE POSITION 1 ===\n");
     removeat(1, &head);
     arr_removeat(1, &list);
 
@@ -578,7 +578,7 @@ int main()
     arr_display(&list);
 
 
-    printf("\n=== REVERSE ===\n");
+    printf("\n======= REVERSE ===\n");
     reverse(&head);
     arr_reverse(&list);
 
@@ -586,7 +586,7 @@ int main()
     arr_display(&list);
 
 
-    printf("\n=== SORT ===\n");
+    printf("\n======= SORT ===\n");
     sort(head);
     arr_sort(&list);
 
@@ -594,7 +594,7 @@ int main()
     arr_display(&list);
 
 
-    printf("\n=== INFO ===\n");
+    printf("\n======= INFO ===\n");
     printf("Linked size = %d\n", size(head));
     printf("Array size  = %d\n", arr_size(&list));
 

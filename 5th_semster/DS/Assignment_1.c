@@ -31,6 +31,52 @@ void init(arraylist *list)
     list->arr = (int *)malloc(list->capacity * sizeof(int));
 }
 
+
+/* ------------------------------ LINKED LIST ------------------------- */
+node *create_node(int data);
+
+void addbegin(int data, node **head);
+void add(int data, node **head);
+void addanypos(int pos, int data, node **head);
+
+int size(node *head);
+bool isEmpty(node *head);
+bool contains(int item, node *head);
+int get(int pos, node *head);
+int indexOf(int item, node *head);
+
+void removefirst(node **head);
+void removelast(node **head);
+void removeat(int pos, node **head);
+
+void reverse(node **head);
+void sort(node *head);
+void display(node *head);
+
+
+/* ---------------------------- ARRAY LIST ---------------------------- */
+void init(arraylist *list);
+void arr_resize(arraylist *list);
+
+void arr_add(int data, arraylist *list);
+void arr_addbegin(int data, arraylist *list);
+void arr_addanypos(int pos, int data, arraylist *list);
+
+bool arr_contains(int item, arraylist *list);
+int arr_size(arraylist *list);
+bool arr_isEmpty(arraylist *list);
+int arr_get(int pos, arraylist *list);
+int arr_indexOf(int item, arraylist *list);
+
+void arr_removefirst(arraylist *list);
+void arr_removelast(arraylist *list);
+void arr_removeat(int pos, arraylist *list);
+
+void arr_reverse(arraylist *list);
+void arr_sort(arraylist *list);
+void arr_display(arraylist *list);
+
+
 void addbegin(int data, node **head)
 {
     node *newnode = create_node(data);

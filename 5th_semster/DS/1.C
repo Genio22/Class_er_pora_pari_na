@@ -124,16 +124,16 @@ void deletelist()
     free(current->next);
 }
 
-// void display()
-// {
-//     struct node *current;
-//     current = head;
-//     while (current != NULL)
-//     {
-//         printf("[%d] -> ", current->data);
-//         current = current->next;
-//     }
-// }
+void display()
+{
+    struct node *current;
+    current = head;
+    while (current != NULL)
+    {
+        printf("[%d] -> ", current->data);
+        current = current->next;
+    }
+}
 
 
 int sizeoflinkl(struct node *head1)

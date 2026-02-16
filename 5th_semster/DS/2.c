@@ -286,7 +286,7 @@ void arr_display(arraylist *arr1)
 
 int main()
 {
-    node *head = NULL;
+    node  ll = NULL;
     arraylist *arr1 = NULL;
 
     printf("Start\n");

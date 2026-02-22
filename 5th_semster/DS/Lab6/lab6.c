@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 
 typedef struct node{
@@ -59,7 +60,7 @@ void display(node *head)
 
 
 int main(){
-    node  ll = NULL;
+    node *head = NULL;
 
     printf("Start\n");
     insert_at_beginner(10, &head);

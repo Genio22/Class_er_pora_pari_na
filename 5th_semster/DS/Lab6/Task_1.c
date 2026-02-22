@@ -92,5 +92,6 @@ int main()
     sum_fibo(3);
 
     printf_down(6);
+    
     return 0;
 }

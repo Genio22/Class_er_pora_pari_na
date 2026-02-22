@@ -1,3 +1,20 @@
+class Vehicle{
+    private String name; 
+    protected float speed;
+    Vehicle(String name, float speed){
+        this.name = name;
+        speed = speed;
+    }
+    public void move(float distance){
+        
+    }
+    public String getName(){
+        return this.name;
+    }
+    public String describe(){
+        return "Mr/Ms." + this.name + ". You are runing a at " + speed + ".";
+    }
+}
 
 public class Main {
     

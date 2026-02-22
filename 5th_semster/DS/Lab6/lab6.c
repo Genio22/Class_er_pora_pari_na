@@ -7,7 +7,6 @@ typedef struct node{
     struct node *next;
 }node;
 
-
 node *create_node(int data)
 {
     node *newnode = (node *)malloc(sizeof(node));
@@ -24,7 +23,7 @@ void insert_at_beginner(int data, node **head)
 }
 
 // recursion for deleletion
-node *delete_nth(node *head, int target){
+node *delete_by_value(node *head, int target){
     if (head == NULL){
         return NULL;
     }
@@ -35,7 +34,7 @@ node *delete_nth(node *head, int target){
         return temp;
     }
 
-    delete_nth(head->next, target);
+    head -> next = delete_by_value(head->next, target);
     return head;
 }
 
@@ -47,7 +46,7 @@ void display(node *head)
 
     while (current != NULL)
     {
-        printf("[%d]", current->data, current->next);
+        printf("[%d]", current->data);
         // printf("[%d|%p]", current->data, current -> next);
         if (current->next != NULL)
         {
@@ -55,9 +54,12 @@ void display(node *head)
         }
         current = current->next;
     }
-    free(current);
+
 }
 
+void sort(node *head){
+    
+}
 
 int main(){
     node *head = NULL;
@@ -70,6 +72,16 @@ int main(){
     insert_at_beginner(60, &head);
     insert_at_beginner(40, &head);
     display(head);
+    
+    printf("\n");
+    head = delete_by_value(head, 30);
+    display(head);
+    
+    printf("\n");
+
+    display(head);
+    
+
     return 0;
 }
 

@@ -57,9 +57,27 @@ void display(node *head)
 
 }
 
-void sort(node *head){
-    
+node* sorted_insert(node* sorted, node* newnode){
+    if(sorted == NULL || newnode->data <= sorted->data){
+        newnode->next = sorted;
+        return newnode;
+    }
+
+    sorted->next = sorted_insert(sorted->next, newnode);
+    return sorted;
 }
+
+
+node* insertion_sort(node* head){
+    if(head == NULL || head->next == NULL)
+        return head;
+
+    node* rest = insertion_sort(head->next);
+
+    head->next = NULL;  
+    return sorted_insert(rest, head);
+}
+
 
 int main(){
     node *head = NULL;
@@ -78,7 +96,7 @@ int main(){
     display(head);
     
     printf("\n");
-
+    insertion_sort(head);
     display(head);
     
 

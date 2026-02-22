@@ -96,7 +96,7 @@ int main(){
     display(head);
     
     printf("\n");
-    insertion_sort(head);
+    head = insertion_sort(head);
     display(head);
     
 

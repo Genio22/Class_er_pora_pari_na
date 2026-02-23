@@ -178,7 +178,7 @@ void display(node *head)
         }
         current = current->next;
     }
-    free(current);
+
 }
 
 //===========================Array list======================//
@@ -286,7 +286,7 @@ void arr_display(arraylist *arr1)
 
 int main()
 {
-    node  ll = NULL;
+    node *head = NULL;
     arraylist *arr1 = NULL;
 
     printf("Start\n");

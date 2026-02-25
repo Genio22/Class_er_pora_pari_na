@@ -58,3 +58,4 @@ SELECT DISTINCT customer_city  FROM customer; --unique display
 
 SELECT account_no FROM account WHERE balance >7000;
 
+

@@ -46,7 +46,9 @@ dnode *create_node_dll(int data)
     return newnode;
 }
 
-void delect(
+void delete(){
+    
+}
 
 void insertatbeg_dll(dnode **head, int data)
 {

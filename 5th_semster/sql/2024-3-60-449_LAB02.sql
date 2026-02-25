@@ -144,4 +144,11 @@ on depositor.a_no = account.account_no;
 --for those accounts which belong to customers 
 --of Dhaka and Khulna city.
 
-
+select distinct account.account_no,
+       account.balance
+from account
+join depositor
+  on account.account_no = depositor.a_no
+join customer
+  on depositor.c_no = customer.customer_no
+where customer.customer_city in ('Dhaka', 'Khulna');

@@ -93,6 +93,7 @@ select customer_name,
   from customer
  where customer_city not in ( 'Dhaka' );
 
+-- 6.
 select customer_name,
        customer_city
   from customer
@@ -106,3 +107,31 @@ select customer_name,
    on depositor.a_no = account.account_no
 )
 on depositor.c_no = customer.customer_no;
+
+
+-- 7.
+select customer_name,
+       customer_city
+  from customer
+  join (
+        depositor
+     join (
+      select account_no
+        from account
+       where balance >= 7000
+   ) account
+   on depositor.a_no = account.account_no
+)
+on depositor.c_no = customer.customer_no 
+and customer_city <> 'Khulna';
+
+--8. Find account number and balance 
+-- for those accounts which belong to 
+-- a customer with id ‘C-102’
+
+SELECT account_no, balance
+   FROM depositor JOIN
+      (SELECT account_no
+      FROM account
+      WHERE 
+      )

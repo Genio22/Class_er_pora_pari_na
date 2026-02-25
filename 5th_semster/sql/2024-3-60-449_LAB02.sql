@@ -145,10 +145,23 @@ on depositor.a_no = account.account_no;
 --of Dhaka and Khulna city.
 
 select distinct account.account_no,
-       account.balance
-from account
-join depositor
-  on account.account_no = depositor.a_no
-join customer
-  on depositor.c_no = customer.customer_no
-where customer.customer_city in ('Dhaka', 'Khulna');
+                account.balance
+  from account
+  join depositor
+on account.account_no = depositor.a_no
+  join customer
+on depositor.c_no = customer.customer_no
+ where customer.customer_city in ( 'Dhaka',
+                                   'Khulna' );
+
+
+--10 Find the customer who have no accounts. 
+-- [Result of this query will be empty for this dataset. However, you must write the correct SQL]
+
+select *
+  from customer c
+ where not exists (
+   select *
+     from depositor d
+    where d.c_no = c.customer_no
+);

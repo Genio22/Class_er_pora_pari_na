@@ -1,3 +1,6 @@
+
+----------  Lab 02 -------------
+
 -- Task 1
 
 create table account (
@@ -165,3 +168,5 @@ select *
      from depositor d
     where d.c_no = c.customer_no
 );
+
+

@@ -122,16 +122,26 @@ select customer_name,
    ) account
    on depositor.a_no = account.account_no
 )
-on depositor.c_no = customer.customer_no 
-and customer_city <> 'Khulna';
+on depositor.c_no = customer.customer_no
+   and customer_city <> 'Khulna';
 
 --8. Find account number and balance 
 -- for those accounts which belong to 
 -- a customer with id ‘C-102’
 
-SELECT account_no, balance
-   FROM depositor JOIN
-      (SELECT account_no
-      FROM account
-      WHERE 
-      )
+select account_no,
+       balance
+  from account
+  join (
+   select a_no
+     from depositor
+    where c_no = 'C-102'
+) depositor
+on depositor.a_no = account.account_no;
+
+
+-- 9 Find all account number and balance 
+--for those accounts which belong to customers 
+--of Dhaka and Khulna city.
+
+

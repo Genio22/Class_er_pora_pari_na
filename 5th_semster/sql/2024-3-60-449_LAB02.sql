@@ -1,4 +1,3 @@
-
 ----------  Lab 02 -------------
 
 -- Task 1
@@ -174,7 +173,6 @@ select *
 
 ----------  Lab 03 -------------
 
-
 drop table depositor cascade constraints;
 drop table borrower cascade constraints;
 drop table account cascade constraints;
@@ -182,113 +180,229 @@ drop table loan cascade constraints;
 drop table customer cascade constraints;
 drop table branch cascade constraints;
 
-create table account
-   (account_number 	varchar(15)	not null,
-    branch_name		varchar(15)	not null,
-    balance 		number		not null,
-    constraint account_pk primary key(account_number));
+create table account (
+   account_number varchar(15) not null,
+   branch_name    varchar(15) not null,
+   balance        number not null,
+   constraint account_pk primary key ( account_number )
+);
 
-create table branch
-   (branch_name 	varchar(15)	not null,
-    branch_city 	varchar(15)	not null,
-    assets 		number		not null,
-    primary key(branch_name));
+create table branch (
+   branch_name varchar(15) not null,
+   branch_city varchar(15) not null,
+   assets      number not null,
+   primary key ( branch_name )
+);
 
-create table customer
-   (customer_name 	varchar(15)	not null,
-    customer_street 	varchar(12)	not null,
-    customer_city 	varchar(15)	not null,
-    primary key(customer_name));
+create table customer (
+   customer_name   varchar(15) not null,
+   customer_street varchar(12) not null,
+   customer_city   varchar(15) not null,
+   primary key ( customer_name )
+);
 
-create table loan
-   (loan_number 	varchar(15)	not null,
-    branch_name		varchar(15)	not null,
-    amount 		number		not null,
-    primary key(loan_number));
+create table loan (
+   loan_number varchar(15) not null,
+   branch_name varchar(15) not null,
+   amount      number not null,
+   primary key ( loan_number )
+);
 
-create table depositor
-   (customer_name 	varchar(15)	not null,
-    account_number 	varchar(15)	not null,
-    primary key(customer_name, account_number),
-    foreign key(account_number) references account(account_number),
-    foreign key(customer_name) references customer(customer_name));
+create table depositor (
+   customer_name  varchar(15) not null,
+   account_number varchar(15) not null,
+   primary key ( customer_name,
+                 account_number ),
+   foreign key ( account_number )
+      references account ( account_number ),
+   foreign key ( customer_name )
+      references customer ( customer_name )
+);
 
-create table borrower
-   (customer_name 	varchar(15)	not null,
-    loan_number 	varchar(15)	not null,
-    primary key(customer_name, loan_number),
-    foreign key(customer_name) references customer(customer_name),
-    foreign key(loan_number) references loan(loan_number));
+create table borrower (
+   customer_name varchar(15) not null,
+   loan_number   varchar(15) not null,
+   primary key ( customer_name,
+                 loan_number ),
+   foreign key ( customer_name )
+      references customer ( customer_name ),
+   foreign key ( loan_number )
+      references loan ( loan_number )
+);
 
 /* populate relations */
 
-insert into customer	values ('Jones',	'Main',		'Harrison');
-insert into customer	values ('Smith',	'Main',		'Rye');
-insert into customer	values ('Hayes',	'Main',		'Harrison');
-insert into customer	values ('Curry',	'North',	'Rye');
-insert into customer	values ('Lindsay',	'Park',		'Pittsfield');
-insert into customer	values ('Turner',	'Putnam',	'Stamford');
-insert into customer	values ('Williams',	'Nassau',	'Princeton');
-insert into customer	values ('Adams',	'Spring',	'Pittsfield');
-insert into customer	values ('Johnson',	'Alma',		'Palo Alto');
-insert into customer	values ('Glenn',	'Sand Hill',	'Woodside');
-insert into customer	values ('Brooks',	'Senator',	'Brooklyn');
-insert into customer	values ('Green',	'Walnut',	'Stamford');
-insert into customer	values ('Jackson',	'University',	'Salt Lake');
-insert into customer	values ('Majeris',	'First',	'Rye');
-insert into customer	values ('McBride',	'Safety',	'Rye');
+insert into customer values ( 'Jones',
+                              'Main',
+                              'Harrison' );
+insert into customer values ( 'Smith',
+                              'Main',
+                              'Rye' );
+insert into customer values ( 'Hayes',
+                              'Main',
+                              'Harrison' );
+insert into customer values ( 'Curry',
+                              'North',
+                              'Rye' );
+insert into customer values ( 'Lindsay',
+                              'Park',
+                              'Pittsfield' );
+insert into customer values ( 'Turner',
+                              'Putnam',
+                              'Stamford' );
+insert into customer values ( 'Williams',
+                              'Nassau',
+                              'Princeton' );
+insert into customer values ( 'Adams',
+                              'Spring',
+                              'Pittsfield' );
+insert into customer values ( 'Johnson',
+                              'Alma',
+                              'Palo Alto' );
+insert into customer values ( 'Glenn',
+                              'Sand Hill',
+                              'Woodside' );
+insert into customer values ( 'Brooks',
+                              'Senator',
+                              'Brooklyn' );
+insert into customer values ( 'Green',
+                              'Walnut',
+                              'Stamford' );
+insert into customer values ( 'Jackson',
+                              'University',
+                              'Salt Lake' );
+insert into customer values ( 'Majeris',
+                              'First',
+                              'Rye' );
+insert into customer values ( 'McBride',
+                              'Safety',
+                              'Rye' );
 
-insert into branch	values ('Downtown',	'Brooklyn',	 900000);
-insert into branch	values ('Redwood',	'Palo Alto',	2100000);
-insert into branch	values ('Perryridge',	'Horseneck',	1700000);
-insert into branch	values ('Mianus',	'Horseneck',	 400200);
-insert into branch	values ('Round Hill',	'Horseneck',	8000000);
-insert into branch	values ('Pownal',	'Bennington',	 400000);
-insert into branch	values ('North Town',	'Rye',		3700000);
-insert into branch	values ('Brighton',	'Brooklyn',	7000000);
-insert into branch	values ('Central',	'Rye',		 400280);
+insert into branch values ( 'Downtown',
+                            'Brooklyn',
+                            900000 );
+insert into branch values ( 'Redwood',
+                            'Palo Alto',
+                            2100000 );
+insert into branch values ( 'Perryridge',
+                            'Horseneck',
+                            1700000 );
+insert into branch values ( 'Mianus',
+                            'Horseneck',
+                            400200 );
+insert into branch values ( 'Round Hill',
+                            'Horseneck',
+                            8000000 );
+insert into branch values ( 'Pownal',
+                            'Bennington',
+                            400000 );
+insert into branch values ( 'North Town',
+                            'Rye',
+                            3700000 );
+insert into branch values ( 'Brighton',
+                            'Brooklyn',
+                            7000000 );
+insert into branch values ( 'Central',
+                            'Rye',
+                            400280 );
 
-insert into account	values ('A-101',	'Downtown',	500);
-insert into account	values ('A-215',	'Mianus',	700);
-insert into account	values ('A-102',	'Perryridge',	400);
-insert into account	values ('A-305',	'Round Hill',	350);
-insert into account	values ('A-201',	'Perryridge',	900);
-insert into account	values ('A-222',	'Redwood',	700);
-insert into account	values ('A-217',	'Brighton',	750);
-insert into account	values ('A-333',	'Central',	850);
-insert into account	values ('A-444',	'North Town',	625);
+insert into account values ( 'A-101',
+                             'Downtown',
+                             500 );
+insert into account values ( 'A-215',
+                             'Mianus',
+                             700 );
+insert into account values ( 'A-102',
+                             'Perryridge',
+                             400 );
+insert into account values ( 'A-305',
+                             'Round Hill',
+                             350 );
+insert into account values ( 'A-201',
+                             'Perryridge',
+                             900 );
+insert into account values ( 'A-222',
+                             'Redwood',
+                             700 );
+insert into account values ( 'A-217',
+                             'Brighton',
+                             750 );
+insert into account values ( 'A-333',
+                             'Central',
+                             850 );
+insert into account values ( 'A-444',
+                             'North Town',
+                             625 );
 
-insert into depositor values ('Johnson','A-101');
-insert into depositor values ('Smith',	'A-215');
-insert into depositor values ('Hayes',	'A-102');
-insert into depositor values ('Hayes',	'A-101');
-insert into depositor values ('Turner',	'A-305');
-insert into depositor values ('Johnson','A-201');
-insert into depositor values ('Jones',	'A-217');
-insert into depositor values ('Lindsay','A-222');
-insert into depositor values ('Majeris','A-333');
-insert into depositor values ('Smith',	'A-444');
+insert into depositor values ( 'Johnson',
+                               'A-101' );
+insert into depositor values ( 'Smith',
+                               'A-215' );
+insert into depositor values ( 'Hayes',
+                               'A-102' );
+insert into depositor values ( 'Hayes',
+                               'A-101' );
+insert into depositor values ( 'Turner',
+                               'A-305' );
+insert into depositor values ( 'Johnson',
+                               'A-201' );
+insert into depositor values ( 'Jones',
+                               'A-217' );
+insert into depositor values ( 'Lindsay',
+                               'A-222' );
+insert into depositor values ( 'Majeris',
+                               'A-333' );
+insert into depositor values ( 'Smith',
+                               'A-444' );
 
-insert into loan	values ('L-17',		'Downtown',	1000);
-insert into loan	values ('L-23',		'Redwood',	2000);
-insert into loan	values ('L-15',		'Perryridge',	1500);
-insert into loan	values ('L-14',		'Downtown',	1500);
-insert into loan	values ('L-93',		'Mianus',	500);
-insert into loan	values ('L-11',		'Round Hill',	900);
-insert into loan	values ('L-16',		'Perryridge',	1300);
-insert into loan	values ('L-20',		'North Town',	7500);
-insert into loan	values ('L-21',		'Central',	570);
+insert into loan values ( 'L-17',
+                          'Downtown',
+                          1000 );
+insert into loan values ( 'L-23',
+                          'Redwood',
+                          2000 );
+insert into loan values ( 'L-15',
+                          'Perryridge',
+                          1500 );
+insert into loan values ( 'L-14',
+                          'Downtown',
+                          1500 );
+insert into loan values ( 'L-93',
+                          'Mianus',
+                          500 );
+insert into loan values ( 'L-11',
+                          'Round Hill',
+                          900 );
+insert into loan values ( 'L-16',
+                          'Perryridge',
+                          1300 );
+insert into loan values ( 'L-20',
+                          'North Town',
+                          7500 );
+insert into loan values ( 'L-21',
+                          'Central',
+                          570 );
 
-insert into borrower values ('Jones',	'L-17');
-insert into borrower values ('Smith',	'L-23');
-insert into borrower values ('Hayes',	'L-15');
-insert into borrower values ('Jackson',	'L-14');
-insert into borrower values ('Curry',	'L-93');
-insert into borrower values ('Smith',	'L-11');
-insert into borrower values ('Williams','L-17');
-insert into borrower values ('Adams',	'L-16');
-insert into borrower values ('McBride',	'L-20');
-insert into borrower values ('Smith',	'L-21');
+insert into borrower values ( 'Jones',
+                              'L-17' );
+insert into borrower values ( 'Smith',
+                              'L-23' );
+insert into borrower values ( 'Hayes',
+                              'L-15' );
+insert into borrower values ( 'Jackson',
+                              'L-14' );
+insert into borrower values ( 'Curry',
+                              'L-93' );
+insert into borrower values ( 'Smith',
+                              'L-11' );
+insert into borrower values ( 'Williams',
+                              'L-17' );
+insert into borrower values ( 'Adams',
+                              'L-16' );
+insert into borrower values ( 'McBride',
+                              'L-20' );
+insert into borrower values ( 'Smith',
+                              'L-21' );
 
 commit;
 
@@ -317,51 +431,127 @@ commit;
 
 
 --1.
-select DIstinct branch_name, branch_city
-   from branch
-   where assets >= 10000;
+select distinct branch_name,
+                branch_city
+  from branch
+ where assets >= 10000;
 
 --2.Find all account numbers and their balance which are opened in ‘Downtown’ branch or
 -- which have balance in between 600 and 750. (on single table)
 
-select account_number, balance 
-   from account 
-   where branch_name = 'Downtown' and balance between 600 and 750;
+select account_number,
+       balance
+  from account
+ where branch_name = 'Downtown'
+   and balance between 600 and 750;
 
 --3.Find all account numbers which are opened in a branch located in ‘Rye’ city. (multiple
 -- tables)
 
-select account_number, balance 
-   from account natural join branch
-   where branch_city = 'Rye';
+select account_number,
+       balance
+  from account
+natural join branch
+ where branch_city = 'Rye';
 
 --4. Find all loan numbers which have amount greater than or equal to 1000 
 -- and their customers are living in ‘Harrison’ city. (multiple tables)
 
 select loan_number
-   from loan Natural join borrower natural join customer
-   where amount>= 1000 and customer_city = 'Harrison'
-   order by loan_number asc; --this is optional
+  from loan
+natural join borrower
+natural join customer
+ where amount >= 1000
+   and customer_city = 'Harrison'
+ order by loan_number asc; --this is optional
 
 --5. Display the account related information based on the descending 
 -- order of the balance. (order by clause)
 
 select *
-   from account
-   order by balance desc;
+  from account
+ order by balance desc;
 
 --6. Display the customer related information in alphabetic order of
 -- customer cities. (order by clause)
 
 select *
-   from customer
-   order by customer_city asc;
+  from customer
+ order by customer_city asc;
 
 --7. Find all customer names who have an account as well as a loan. (intersect)
-select customer_name 
-   from depositor
-   intersect 
 select customer_name
-   from borrower;
+  from depositor
+intersect
+select customer_name
+  from borrower;
+
+--8. Find all customer related information who have an account or a loan. (union)
+
+select customer_name,
+       customer_street,
+       customer_city
+  from customer
+natural join depositor
+union
+select customer_name,
+       customer_street,
+       customer_city
+  from customer
+natural join borrower;
+
+--9. Find all customer names and their cities who have a loan but not an account. (minus)
+select customer_name,
+       customer_city
+  from customer
+ where customer_name in (
+   select customer_name
+     from borrower
+)
+   and customer_name not in (
+   select customer_name
+     from depositor
+);
+
+--10. Find the total assets of all branches. (aggregate function)
+select sum(assets) as total
+  from branch;
+
+--11. Find the average balance of accounts at each branch. (aggregate function)
+select branch_name,
+       avg(balance)
+  from account
+ group by branch_name;
+
+--12. Find the average balance of accounts at each branch city. (aggregate function)
+select branch_city,
+       avg(balance)
+  from account
+natural join branch
+ group by branch.branch_city;
+
+--13. Find the lowest amount of loan at each branch. (aggregate function)
+select branch_name,
+       min(amount)
+  from loan
+ group by branch_name;
+
+--14. Find the total number of loans at each branch. (aggregate function)
+select branch_name,
+       count(loan_number)
+  from loan
+ group by branch_name;
+
+--15. Find the customer name and account number of the account which has the highest balance.
+-- (aggregate function)
+
+select customer_name,
+       account_number
+  from account
+natural join depositor
+natural join customer
+ where balance = (
+   select max(balance)
+     from account
+);
 --sql 'RELAQUANTISTEN_SCHEMA_F3KXG/QZN15VQUC!4SD27UC3D1RzQAS6Y8FI@//db.freesql.com:1521/23ai_34ui2'
-                                             

@@ -170,8 +170,8 @@ void display(node *head)
 
     while (current != NULL)
     {
-        printf("[%d]", current->data, current->next);
-        // printf("[%d|%p]", current->data, current -> next);
+        // printf("[%d]", current->data, current->next);
+        printf("[%d|%p]", current->data, current -> next);
         if (current->next != NULL)
         {
             printf(" -> ");

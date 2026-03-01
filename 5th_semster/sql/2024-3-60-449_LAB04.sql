@@ -151,3 +151,5 @@ from department d
 full outer join instructor i
 on d.dept_name = i.dept_name
 group by d.dept_name;
+
+

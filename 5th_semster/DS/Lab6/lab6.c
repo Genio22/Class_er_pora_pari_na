@@ -9,7 +9,7 @@ void THO(int n, char beg, char aux, char des)
         return;
     }
     THO(n - 1, beg, des, aux);
-    THO(1, beg, aux, des);
+    printf("Move disk from %c to %c\n", beg, des);
     THO(n - 1, aux, beg, des);
 }
 
@@ -85,10 +85,11 @@ void sum_fibo(int n)
 
 // Link list
 
-typedef struct node{
+typedef struct node
+{
     int data;
     struct node *next;
-}node;
+} node;
 
 node *create_node(int data)
 {
@@ -106,21 +107,23 @@ void insert_at_beginner(int data, node **head)
 }
 
 // recursion for deleletion
-node *delete_by_value(node *head, int target){
-    if (head == NULL){
+node *delete_by_value(node *head, int target)
+{
+    if (head == NULL)
+    {
         return NULL;
     }
-    
-    if (head -> data == target){
-        node *temp = head -> next;
+
+    if (head->data == target)
+    {
+        node *temp = head->next;
         free(head);
         return temp;
     }
 
-    head -> next = delete_by_value(head->next, target);
+    head->next = delete_by_value(head->next, target);
     return head;
 }
-
 
 void display(node *head)
 {
@@ -137,11 +140,12 @@ void display(node *head)
         }
         current = current->next;
     }
-
 }
 
-node* sorted_insert(node* sorted, node* newnode){
-    if(sorted == NULL || newnode->data <= sorted->data){
+node *sorted_insert(node *sorted, node *newnode)
+{
+    if (sorted == NULL || newnode->data <= sorted->data)
+    {
         newnode->next = sorted;
         return newnode;
     }
@@ -150,30 +154,27 @@ node* sorted_insert(node* sorted, node* newnode){
     return sorted;
 }
 
-
-node* insertion_sort(node* head){
-    if(head == NULL || head->next == NULL)
+node *insertion_sort(node *head)
+{
+    if (head == NULL || head->next == NULL)
         return head;
 
-    node* rest = insertion_sort(head->next);
+    node *rest = insertion_sort(head->next);
 
-    head->next = NULL;  
+    head->next = NULL;
     return sorted_insert(rest, head);
 }
 
+int main()
+{
 
-int main(){
-
-        gcd(36, 12);
+    gcd(36, 12);
     digit_sum(42);
     THO(4, 'A', 'B', 'C');
 
     sum_fibo(3);
 
     printf_down(6);
-    
-
-
 
     node *head = NULL;
 
@@ -185,21 +186,14 @@ int main(){
     insert_at_beginner(60, &head);
     insert_at_beginner(40, &head);
     display(head);
-    
+
     printf("\n");
     head = delete_by_value(head, 30);
     display(head);
-    
+
     printf("\n");
     head = insertion_sort(head);
     display(head);
-    
 
     return 0;
 }
-
-
-
-
-
-

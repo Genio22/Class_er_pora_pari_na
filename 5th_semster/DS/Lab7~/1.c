@@ -29,7 +29,7 @@ node *build_tree()
 
     char opt;
     printf("Does node %d have a left child? (y/n): ", value);
-    scanf(" %c ", &opt);
+    scanf(" %c", &opt);
 
     if (opt == 'y')
     {
@@ -41,7 +41,7 @@ node *build_tree()
     }
 
     printf("Does node %d have a right child? (y/n): ", value);
-    scanf(" %c ", &opt);
+    scanf(" %c", &opt);
 
     if (opt == 'y')
     {
@@ -133,12 +133,66 @@ int rheight(node *root)
 
 void balance(node *root)
 {
-    ((balance(root->left) - balance(root->right)) <= 1) ? printf("Balance") : printf("Not Balance");
+    if (root == NULL)
+    {
+        printf("Tree is empty.\n");
+        return;
+    }
+    ((height(root->left) - height(root->right)) <= 1 && (height(root->right) - height(root->left)) <= 1) ? printf("Balance") : printf("Not Balance");
 }
 
 int main()
 {
     node *root = NULL;
+    int choice, value;
+
+    while (1)
+    {
+        printf("\n1. Build Tree\n2. Insert\n3. Inorder\n4. Preorder\n5. Postorder\n6. Height\n7. Balance Check\n8. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            root = build_tree();
+            break;
+        case 2:
+            root = insert(root, 50);
+            insert(root, 30);
+            insert(root, 70);
+            insert(root, 20);
+            insert(root, 40);
+            insert(root, 60);
+            insert(root, 80);
+            break;
+        case 3:
+            printf("Inorder: ");
+            inorder(root);
+            printf("\n");
+            break;
+        case 4:
+            printf("Preorder: ");
+            preorder(root);
+            printf("\n");
+            break;
+        case 5:
+            printf("Postorder: ");
+            postorder(root);
+            printf("\n");
+            break;
+        case 6:
+            printf("Height: %d\n", height(root));
+            break;
+        case 7:
+            balance(root);
+            break;
+        case 8:
+            exit(0);
+        default:
+            printf("Invalid choice!\n");
+        }
+    }
 
     return 0;
 }

@@ -20,20 +20,37 @@ node *create_node(int value)
 node *build_tree()
 {
     int value;
-    printf("Enter data (enter -1 to skip): ");
+    printf("Enter data (enter -1 for no node): ");
     scanf("%d", &value);
 
     if (value == -1)
-    {
         return NULL;
+    node *root = create_node(value);
+
+    char opt;
+    printf("Does node %d have a left child? (y/n): ", value);
+    scanf(" %c ", &opt);
+
+    if (opt == 'y')
+    {
+        root->left = build_tree();
+    }
+    else
+    {
+        root->left = NULL;
     }
 
-    node *root = create_node(value);
-    printf("Enter left child of %d:\n", value);
-    root->left = build_tree();
-    printf("Enter right child of %d:\n", value);
-    root->right = build_tree();
+    printf("Does node %d have a right child? (y/n): ", value);
+    scanf(" %c ", &opt);
 
+    if (opt == 'y')
+    {
+        root->right = build_tree();
+    }
+    else
+    {
+        root->right = NULL;
+    }
     return root;
 }
 
@@ -96,51 +113,32 @@ int height(node *root)
     return (height(root->left) > height(root->right)) ? height(root->left) + 1 : height(root->right) + 1;
 }
 
+int lheight(node *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    return lheight(root->left) + 1;
+}
+
+int rheight(node *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    return rheight(root->right) + 1;
+}
+
+void balance(node *root)
+{
+    ((balance(root->left) - balance(root->right)) <= 1) ? printf("Balance") : printf("Not Balance");
+}
+
 int main()
 {
     node *root = NULL;
-    int choice, value;
-
-    while (1)
-    {
-        printf("\n1. Build Tree\n2. Insert\n3. Inorder\n4. Preorder\n5. Postorder\n6. Height\n7. Exit\n");
-        printf("Enter choice: ");
-        scanf("%d", &choice);
-
-        switch (choice)
-        {
-        case 1:
-            root = build_tree();
-            break;
-        case 2:
-            printf("Enter value to insert: ");
-            scanf("%d", &value);
-            root = insert(root, value);
-            break;
-        case 3:
-            printf("Inorder: ");
-            inorder(root);
-            printf("\n");
-            break;
-        case 4:
-            printf("Preorder: ");
-            preorder(root);
-            printf("\n");
-            break;
-        case 5:
-            printf("Postorder: ");
-            postorder(root);
-            printf("\n");
-            break;
-        case 6:
-            printf("Height: %d\n", height(root));
-            break;
-        case 7:
-            exit(0);
-        default:
-            printf("Invalid choice!\n");
-        }
-    }
 
     return 0;
 }

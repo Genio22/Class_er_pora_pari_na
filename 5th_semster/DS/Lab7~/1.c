@@ -141,6 +141,19 @@ void balance(node *root)
     ((height(root->left) - height(root->right)) <= 1 && (height(root->right) - height(root->left)) <= 1) ? printf("Balance") : printf("Not Balance");
 }
 
+void clear_tree(node *root)
+{
+    if (root == NULL)
+        return;
+
+    // First, free left and right subtrees
+    clear_tree(root->left);
+    clear_tree(root->right);
+
+    // Then, free the current node
+    free(root);
+}
+
 int main()
 {
     node *root = NULL;
@@ -148,7 +161,7 @@ int main()
 
     while (1)
     {
-        printf("\n1. Build Tree\n2. Insert\n3. Inorder\n4. Preorder\n5. Postorder\n6. Height\n7. Balance Check\n8. Exit\n");
+        printf("\n1. Build Tree\n2. Insert Example BST\n3. Inorder\n4. Preorder\n5. Postorder\n6. Height\n7. Balance Check\n8. Exit\n9. Create Unbalanced Tree\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
@@ -158,6 +171,8 @@ int main()
             root = build_tree();
             break;
         case 2:
+            clear_tree(root);
+            root = NULL;
             root = insert(root, 50);
             insert(root, 30);
             insert(root, 70);
@@ -165,6 +180,19 @@ int main()
             insert(root, 40);
             insert(root, 60);
             insert(root, 80);
+            break;
+
+        case 9: // unbalance
+            clear_tree(root);
+            root = NULL;
+            root = insert(root, 50);
+            insert(root, 40);
+            insert(root, 30);
+            insert(root, 20);
+            insert(root, 10);
+            insert(root, 5);
+            insert(root, 1);
+
             break;
         case 3:
             printf("Inorder: ");
@@ -188,6 +216,7 @@ int main()
             balance(root);
             break;
         case 8:
+            clear_tree(root);
             exit(0);
         default:
             printf("Invalid choice!\n");

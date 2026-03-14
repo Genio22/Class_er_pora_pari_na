@@ -17,6 +17,7 @@ node *create_node(int value)
     return newnode;
 }
 
+
 node *build_tree()
 {
     int value;

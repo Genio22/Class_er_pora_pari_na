@@ -25,7 +25,7 @@ node *build_tree()
     scanf("%d", &value);
 
     if (value == -1)
-        return NULL;
+        return NULL; 
     node *root = create_node(value);
 
     char opt;

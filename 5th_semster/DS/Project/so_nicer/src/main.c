@@ -87,7 +87,7 @@ void run_benchmark() {
     printf("%-10s %-20s %-20s %s\n", "Orders", "Baseline Time (s)", "Optimized Time (s)", "Improvement");
     printf("%s\n", "---------------------------------------------------------------------");
     
-    int test_sizes[] = {500, 1000, 2000, 50000, 100000, 200000};
+    int test_sizes[] = {500, 1000, 2000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000};
     int num_tests = sizeof(test_sizes) / sizeof(test_sizes[0]);
     
     for (int t = 0; t < num_tests; t++) {

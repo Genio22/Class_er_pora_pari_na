@@ -1,0 +1,8 @@
+{
+    "code-runner.executorMap": {
+        "c": "cd $dir && gcc -I../lib main.c order_book.c red_black_tree.c fibonacci_heap.c -o main -lm && ./main",
+        "cpp": "cd $dir && g++ -I../lib main.c order_book.c red_black_tree.c fibonacci_heap.c -o main -lm && ./main"
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true
+}

@@ -17,5 +17,11 @@
     "MAIN.C": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled",
-  "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe"
+  "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+  "code-runner.executorMap": {
+    "c": "cd $dir && gcc -I../lib main.c order_book.c red_black_tree.c fibonacci_heap.c -o main -lm && ./main",
+    "cpp": "cd $dir && g++ -I../lib main.c order_book.c red_black_tree.c fibonacci_heap.c -o main -lm && ./main"
+  },
+  "code-runner.runInTerminal": true,
+  "code-runner.saveFileBeforeRun": true
 }

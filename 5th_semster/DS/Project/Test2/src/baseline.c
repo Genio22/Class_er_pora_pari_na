@@ -7,7 +7,7 @@
  *   Ties on price   → earlier timestamp gets priority
  *   Partial fills   → reduce quantity, keep remainder in book
  */
-#include "baseline.h"
+#include "../lib/baseline.h"
 #include <stdlib.h>
 #include <stdio.h>
 

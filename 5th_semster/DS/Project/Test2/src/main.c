@@ -11,12 +11,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "order.h"
-#include "trade.h"
-#include "baseline.h"
-#include "optimized.h"
-#include "scenario.h"
-#include "performance.h"
+#include "../lib/order.h"
+#include "../lib/trade.h"
+#include "../lib/baseline.h"
+#include "../lib/optimized.h"
+#include "../lib/scenario.h"
+#include "../lib/performance.h"
 
 /* Maximum trades one order can generate in a single process() call.
    With qty up to 500 and 2000 orders, this is conservative.         */
@@ -66,10 +66,10 @@ static double bench_optimized(const Order *orders, int n) {
 /* ================================================================== */
 static void run_demo(int n) {
     printf("\n");
-    printf("╔══════════════════════════════════════════════════════════╗\n");
-    printf("║  DEMO  —  Processing %4d orders (seed=%u)             ║\n",
+    printf("+============================================================+\n");
+    printf("|  DEMO - Processing %4d orders (seed=%u)              |\n",
            n, RNG_SEED);
-    printf("╚══════════════════════════════════════════════════════════╝\n");
+    printf("+============================================================+\n");
 
     Order *orders = generate_orders(n, RNG_SEED);
 
@@ -83,7 +83,7 @@ static void run_demo(int n) {
     for (int i = 0; i < show; i++) order_print(&orders[i]);
 
     /* ---- BASELINE ---- */
-    printf("\n[Baseline — first 10 trades printed]\n");
+    printf("\n[Baseline - first 10 trades printed]\n");
     {
         BaselineBook *bk    = baseline_create();
         Trade         trades[MAX_TRADES_PER_ORDER];
@@ -109,7 +109,7 @@ static void run_demo(int n) {
     }
 
     /* ---- OPTIMISED ---- */
-    printf("\n[Optimised — first 10 trades printed]\n");
+    printf("\n[Optimised - first 10 trades printed]\n");
     {
         OptimizedBook *bk    = opt_create();
         Trade          trades[MAX_TRADES_PER_ORDER];
@@ -168,7 +168,7 @@ static void validate(int n) {
     printf("  n=%-5d  BL trades=%-5d  OPT trades=%-5d  "
            "BL qty=%-7ld  OPT qty=%-7ld  %s\n",
            n, bl_trades, op_trades, bl_qty, op_qty,
-           (bl_trades == op_trades && bl_qty == op_qty) ? "OK ✓" : "MISMATCH ✗");
+           (bl_trades == op_trades && bl_qty == op_qty) ? "OK [PASS]" : "FAIL [MISMATCH]");
 }
 
 /* ================================================================== */
@@ -182,13 +182,13 @@ static void run_perf_comparison(void) {
     int REPS = 5;
 
     printf("\n");
-    printf("╔═══════════════════════════════════════════════════════════════════╗\n");
-    printf("║                  PERFORMANCE COMPARISON TABLE                    ║\n");
-    printf("║  (best of %d runs per size, same random seed=%u)                ║\n",
+    printf("+===================================================================+\n");
+    printf("|                  PERFORMANCE COMPARISON TABLE                   |\n");
+    printf("|  (best of %d runs per size, same random seed=%u)               |\n",
            REPS, RNG_SEED);
-    printf("╠══════════╦═════════════════╦═════════════════╦════════════════════╣\n");
-    printf("║  Orders  ║  Baseline  (ms) ║  Optimised (ms) ║  Speedup           ║\n");
-    printf("╠══════════╬═════════════════╬═════════════════╬════════════════════╣\n");
+    printf("+===========+=================+=================+==================+\n");
+    printf("|  Orders   |  Baseline (ms)  |  Optimised (ms) |  Speedup         |\n");
+    printf("+===========+=================+=================+==================+\n");
 
     for (int s = 0; s < num_sizes; s++) {
         int    n      = sizes[s];
@@ -204,10 +204,10 @@ static void run_perf_comparison(void) {
         free(orders);
 
         double speedup = (opt_best > 1e-9) ? bl_best / opt_best : 0.0;
-        printf("║  %-7d ║  %13.4f  ║  %13.4f  ║  %6.2fx faster     ║\n",
+        printf("|  %-7d |  %13.4f  |  %13.4f  |  %6.2fx faster    |\n",
                n, bl_best, opt_best, speedup);
     }
-    printf("╚══════════╩═════════════════╩═════════════════╩════════════════════╝\n");
+    printf("+===========+=================+=================+==================+\n");
     printf("\nNote: Optimised is faster for large n due to O(log n) vs O(n)\n"
            "      tree traversal.  At small n, constant factors may dominate.\n");
 }
@@ -216,14 +216,14 @@ static void run_perf_comparison(void) {
 /*  main                                                              */
 /* ================================================================== */
 int main(void) {
-    printf("╔══════════════════════════════════════════════════════════════════╗\n");
-    printf("║   Stock Market Order Matching Engine                             ║\n");
-    printf("║   Baseline: Sorted Linked List                                   ║\n");
-    printf("║   Optimised: Red-Black Tree (price) + Fibonacci Heap (expiry)   ║\n");
-    printf("╚══════════════════════════════════════════════════════════════════╝\n");
+    printf("+===================================================================+\n");
+    printf("|   Stock Market Order Matching Engine                            |\n");
+    printf("|   Baseline: Sorted Linked List                                  |\n");
+    printf("|   Optimised: Red-Black Tree (price) + Fibonacci Heap (expiry)  |\n");
+    printf("+===================================================================+\n");
 
     /* ---- 1. Correctness validation -------------------------------- */
-    printf("\n[Validation — both systems must produce identical trade counts]\n");
+    printf("\n[Validation - both systems must produce identical trade counts]\n");
     int val_sizes[] = {50, 100, 500, 1000};
     for (int i = 0; i < 4; i++) validate(val_sizes[i]);
 

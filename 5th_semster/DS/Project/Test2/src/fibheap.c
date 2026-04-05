@@ -12,12 +12,13 @@
  * Potential function Φ = (# trees in root list) + 2*(# marked nodes)
  * drives the amortised analysis.
  */
-#include "fibheap.h"
+#include "../lib/fibheap.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 
 /* A key smaller than any real timestamp, used by fh_delete */
-#define FH_NEG_INF  (-(1L << 60))
+#define FH_NEG_INF  LONG_MIN
 
 /* Safe upper bound on maximum degree for n <= 2^62 nodes.
    Actual max degree <= 1.44 * log2(n), so 90 is very conservative. */

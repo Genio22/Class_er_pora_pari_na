@@ -1,5 +1,5 @@
 /* scenario.c */
-#include "scenario.h"
+#include "../lib/scenario.h"
 #include <stdlib.h>
 #include <stdio.h>
 

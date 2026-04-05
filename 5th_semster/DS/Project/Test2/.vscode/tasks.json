@@ -2,83 +2,55 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "Compile and Run main.c",
             "type": "shell",
+            "command": "g++",
+            "args": [
+                "${workspaceFolder}/src/main.c",
+                "${workspaceFolder}/src/optimized.c",
+                "${workspaceFolder}/src/rbtree.c",
+                "${workspaceFolder}/src/fibheap.c",
+                "${workspaceFolder}/src/baseline.c",
+                "${workspaceFolder}/src/order.c",
+                "${workspaceFolder}/src/trade.c",
+                "${workspaceFolder}/src/scenario.c",
+                "${workspaceFolder}/src/performance.c",
+                "-o",
+                "${workspaceFolder}/src/main",
+                "-lm"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "windows": {
-                "command": "powershell",
-                "args": [
-                    "-c",
-                    "mingw32-make"
-                ]
-            },
-            "linux": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "make"
-                ]
-            },
-            "osx": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "make"
-                ]
+            "problemMatcher": ["$gcc"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
             }
         },
         {
-            "label": "build & run",
+            "label": "Run main",
             "type": "shell",
+            "command": "${workspaceFolder}/src/main",
             "windows": {
-                "command": "powershell",
-                "args": [
-                    "-c",
-                    "'mingw32-make run'"
-                ]
+                "command": "${workspaceFolder}\\src\\main.exe"
             },
-            "linux": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "'make run'"
-                ]
-            },
-            "osx": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "'make run'"
-                ]
+            "dependsOn": ["Compile and Run main.c"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
             }
         },
         {
-            "label": "clean",
+            "label": "Build and Run",
             "type": "shell",
-            "windows": {
-                "command": "powershell",
-                "args": [
-                    "-c",
-                    "'mingw32-make clean'"
-                ]
-            },
-            "linux": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "'make clean'"
-                ]
-            },
-            "osx": {
-                "command": "bash",
-                "args": [
-                    "-c",
-                    "'make clean'"
-                ]
-            }
+            "dependsOn": ["Compile and Run main.c", "Run main"],
+            "isBackground": false
         }
     ]
 }

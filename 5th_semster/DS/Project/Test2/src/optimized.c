@@ -8,7 +8,7 @@
  *   - "schedule expiry" is O(1) amortised via fh_insert
  *   - "process next expiry" is O(log n) amortised via fh_extract_min
  */
-#include "optimized.h"
+#include "../lib/optimized.h"
 #include <stdlib.h>
 #include <stdio.h>
 

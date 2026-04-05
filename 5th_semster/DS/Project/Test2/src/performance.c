@@ -1,5 +1,5 @@
 /* performance.c */
-#include "performance.h"
+#include "../lib/performance.h"
 
 void timer_start(Timer *t) {
     clock_gettime(CLOCK_MONOTONIC, &t->start);

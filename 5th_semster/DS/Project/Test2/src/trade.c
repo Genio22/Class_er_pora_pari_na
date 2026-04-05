@@ -1,5 +1,5 @@
 /* trade.c */
-#include "trade.h"
+#include "../lib/trade.h"
 #include <stdio.h>
 
 void trade_print(const Trade *t) {

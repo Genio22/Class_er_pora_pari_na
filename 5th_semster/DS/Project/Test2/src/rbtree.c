@@ -12,7 +12,7 @@
  * These invariants ensure height <= 2·log2(n+1), giving
  * O(log n) insert / delete / search.
  */
-#include "rbtree.h"
+#include "../lib/rbtree.h"
 #include <stdlib.h>
 #include <stdio.h>
 

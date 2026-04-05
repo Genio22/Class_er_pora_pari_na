@@ -1,5 +1,5 @@
 /* order.c */
-#include "order.h"
+#include "../lib/order.h"
 #include <stdio.h>
 
 const char *order_type_str(OrderType t) {

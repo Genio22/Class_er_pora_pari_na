@@ -19,8 +19,8 @@
   "C_Cpp.errorSquiggles": "disabled",
   "C_Cpp.default.compilerPath": "C:\\MinGW\\bin\\gcc.exe",
   "code-runner.executorMap": {
-    "c": "cd $dir && gcc -I../lib main.c order_book.c red_black_tree.c fibonacci_heap.c -o main -lm && ./main",
-    "cpp": "cd $dir && g++ -I../lib main.c order_book.c red_black_tree.c fibonacci_heap.c -o main -lm && ./main"
+    "c": "cd $dir && powershell -Command \"if (Test-Path order_book.c) { gcc -I../lib main.c order_book.c red_black_tree.c fibonacci_heap.c -o main -lm; ./main } else { gcc main.c optimized.c rbtree.c fibheap.c baseline.c order.c trade.c scenario.c performance.c -o main -lm; ./main }\"",
+    "cpp": "cd $dir && powershell -Command \"if (Test-Path order_book.c) { g++ -I../lib main.c order_book.c red_black_tree.c fibonacci_heap.c -o main -lm; ./main } else { g++ main.c optimized.c rbtree.c fibheap.c baseline.c order.c trade.c scenario.c performance.c -o main -lm; ./main }\""
   },
   "code-runner.runInTerminal": true,
   "code-runner.saveFileBeforeRun": true

@@ -72,13 +72,23 @@ static void consolidate(FibonacciHeap *heap) {
     int max_degree = (int)log2(heap->num_nodes) + 2;
     FibNode **A = (FibNode **)calloc(max_degree, sizeof(FibNode *));
     
-    FibNode **root_nodes = (FibNode **)malloc(sizeof(FibNode *) * max_degree);
+    /* Count root nodes first to allocate correct size */
     int root_count = 0;
     FibNode *x = heap->min_node;
+    if (x) {
+        do {
+            root_count++;
+            x = x->right;
+        } while (x != heap->min_node);
+    }
+    
+    FibNode **root_nodes = (FibNode **)malloc(sizeof(FibNode *) * root_count);
+    int idx = 0;
+    x = heap->min_node;
     
     if (x) {
         do {
-            root_nodes[root_count++] = x;
+            root_nodes[idx++] = x;
             x = x->right;
         } while (x != heap->min_node);
     }
@@ -87,7 +97,7 @@ static void consolidate(FibonacciHeap *heap) {
         FibNode *curr = root_nodes[i];
         int d = curr->degree;
         
-        while (A[d] != NULL) {
+        while (d < max_degree && A[d] != NULL) {
             FibNode *y = A[d];
             
             if (curr->key > y->key) {
@@ -101,7 +111,8 @@ static void consolidate(FibonacciHeap *heap) {
             d++;
         }
         
-        A[d] = curr;
+        if (d < max_degree)
+            A[d] = curr;
     }
     
     heap->min_node = NULL;

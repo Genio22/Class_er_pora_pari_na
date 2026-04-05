@@ -237,8 +237,8 @@ static void rb_node_destroy(RBTree *tree, RBNode *node) {
     rb_node_destroy(tree, node->left);
     rb_node_destroy(tree, node->right);
     
-    if (node->orders)
-        free(node->orders);
+    /* Note: Don't free node->orders here as Order pointers are managed 
+       by the Fibonacci heap and freed there during optimized_order_book_destroy */
     
     free(node);
 }

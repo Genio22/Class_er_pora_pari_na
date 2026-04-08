@@ -3,39 +3,40 @@
 ## Entity-Relationship Diagram
 
 ```plaintext
-+---------------------+     +-----------------+     +------------------+
-|      Customer       |     |    Restaurant    |     |      Order       |
-|---------------------|     |-----------------|     |------------------|
-| - customer_id (PK)  |     | - restaurant_id (PK) | - order_id (PK)
-| - name              |     | - name            | - order_date
-| - email             |     | - location        | - total_amount
-| - phone             |     | - rating          | - status
-|---------------------|     |-----------------|     |------------------|
++---------------------+     +---------------------+     +------------------+
+|      Customer       |     |    Restaurant       |     |      Order       |
+|---------------------|     |-----------------    |     |------------------|
+| - customer_id (PK)  |     | - restaurant_id (PK)|     | - order_id (PK)  |
+| - name              |     | - name              |     | - order_date     |
+| - email             |     | - location          |     | - total_amount   |
+| - phone             |     | - rating            |     | - status         |
+|---------------------|     |---------------------|     |------------------|
          |                      |                |              |                  |
          |                      |                |              |                  |
          |                      |                |              |                  |
-         +---------------------+                +--------------+         +------------------+
+         +---------------------+                        +------------------+
          |  +------------------+
 
-                +-----------------+
-             |   Order_Items    |
-             |-------------------|
+             +----------------------+
+             |   Order_Items        |
+             |----------------------|
              | - order_item_id (PK) |
-             | - order_id (FK) |
-             | - food_id (FK)   |
-             | - quantity        | 
-             | - price           | 
-             |-------------------|
+             | - order_id (FK)      |
+             | - food_id (FK)       |
+             | - quantity           | 
+             | - price              | 
+             |----------------------|
           
-                 +----------------+     +-------------------+
-             |       Food       |     |    Payment        |
-             |-------------------|     |-------------------|
-             | - food_id (PK)    |     | - payment_id (PK) |
-             | - name            |     | - order_id (FK)   |
-             | - price           |     | - amount           |
-             | - restaurant_id (FK)|    | - payment_method   |
-             | - calories        |     | - payment_status    |
-             |-------------------|     | - payment_date     |
+             +---------------------+     +-------------------+
+             |       Food          |     |    Payment        |
+             |---------------------|     |-------------------|
+             | - food_id (PK)      |     | - payment_id (PK) |
+             | - name              |     | - order_id (FK)   |
+             | - price             |     | - amount          |
+             | - restaurant_id (FK)|     | - payment_method  |
+             | - calories          |     | - payment_status  |
+             |---------------------|     | - payment_date    |
+                                         |-------------------| 
 ```
 
 ## Relational Schema Description

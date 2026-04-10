@@ -1,241 +1,243 @@
-/*
- * baseline.c — Linked-list order book implementation
- *
- * Matching rules (same for both systems):
- *   BUY  at price P → match lowest  SELL whose price <= P
- *   SELL at price P → match highest BUY  whose price >= P
- *   Ties on price   → earlier timestamp gets priority
- *   Partial fills   → reduce quantity, keep remainder in book
- */
-#include "../lib/baseline.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "order_book.h"
 
-/* ------------------------------------------------------------------ */
-/*  Allocation helpers                                                 */
-/* ------------------------------------------------------------------ */
+typedef struct {
+    BookEntry *entries;
+    int count;
+    int capacity;
+} SimpleBook;
 
-BaselineBook *baseline_create(void) {
-    BaselineBook *bk = (BaselineBook *)malloc(sizeof(BaselineBook));
-    bk->buy_head          = NULL;
-    bk->sell_head         = NULL;
-    bk->inserted          = 0;
-    bk->matched_trades    = 0;
-    bk->total_matched_qty = 0;
-    return bk;
+static SimpleBook buy_book;
+static SimpleBook sell_book;
+
+void baseline_init() {
+    buy_book.capacity = 10000;
+    buy_book.count = 0;
+    buy_book.entries = (BookEntry *)malloc(sizeof(BookEntry) * buy_book.capacity);
+    
+    sell_book.capacity = 10000;
+    sell_book.count = 0;
+    sell_book.entries = (BookEntry *)malloc(sizeof(BookEntry) * sell_book.capacity);
 }
 
-static void free_list(BLNode *head) {
-    while (head) {
-        BLNode *tmp = head->next;
-        free(head);
-        head = tmp;
+void baseline_cleanup() {
+    free(buy_book.entries);
+    free(sell_book.entries);
+}
+
+void baseline_add_to_buy_book(Order *order, int remaining_qty) {
+    if (buy_book.count >= buy_book.capacity) {
+        buy_book.capacity *= 2;
+        buy_book.entries = (BookEntry *)realloc(buy_book.entries, 
+                                                sizeof(BookEntry) * buy_book.capacity);
     }
+    buy_book.entries[buy_book.count].id = order->id;
+    buy_book.entries[buy_book.count].quantity = remaining_qty;
+    buy_book.entries[buy_book.count].price = order->price;
+    buy_book.count++;
 }
 
-void baseline_destroy(BaselineBook *bk) {
-    if (!bk) return;
-    free_list(bk->buy_head);
-    free_list(bk->sell_head);
-    free(bk);
-}
-
-static BLNode *make_node(Order o) {
-    BLNode *n  = (BLNode *)malloc(sizeof(BLNode));
-    n->order   = o;
-    n->next    = NULL;
-    return n;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Sorted insertion                                                   */
-/* ------------------------------------------------------------------ */
-
-/*
- * buy_insert: keeps list sorted descending by price.
- * For equal prices the earlier (smaller) timestamp comes first.
- */
-static void buy_insert(BaselineBook *bk, Order o) {
-    BLNode  *node = make_node(o);
-    BLNode **pp   = &bk->buy_head;
-    while (*pp) {
-        double p = (*pp)->order.price;
-        /* o should go before *pp if: o.price > p
-           OR (prices equal AND o is earlier)            */
-        if (o.price > p) break;
-        if (o.price == p && o.timestamp < (*pp)->order.timestamp) break;
-        pp = &(*pp)->next;
+void baseline_add_to_sell_book(Order *order, int remaining_qty) {
+    if (sell_book.count >= sell_book.capacity) {
+        sell_book.capacity *= 2;
+        sell_book.entries = (BookEntry *)realloc(sell_book.entries, 
+                                                 sizeof(BookEntry) * sell_book.capacity);
     }
-    node->next = *pp;
-    *pp        = node;
+    sell_book.entries[sell_book.count].id = order->id;
+    sell_book.entries[sell_book.count].quantity = remaining_qty;
+    sell_book.entries[sell_book.count].price = order->price;
+    sell_book.count++;
 }
 
-/*
- * sell_insert: keeps list sorted ascending by price.
- * For equal prices the earlier timestamp comes first.
- */
-static void sell_insert(BaselineBook *bk, Order o) {
-    BLNode  *node = make_node(o);
-    BLNode **pp   = &bk->sell_head;
-    while (*pp) {
-        double p = (*pp)->order.price;
-        if (o.price < p) break;
-        if (o.price == p && o.timestamp < (*pp)->order.timestamp) break;
-        pp = &(*pp)->next;
+void baseline_remove_order(SimpleBook *book, int index) {
+    for (int i = index; i < book->count - 1; i++) {
+        book->entries[i] = book->entries[i + 1];
     }
-    node->next = *pp;
-    *pp        = node;
+    book->count--;
 }
 
-/* Remove the node currently pointed-to by *pp and advance *pp. */
-static void remove_node(BLNode **pp) {
-    BLNode *del = *pp;
-    *pp         = del->next;
-    free(del);
-}
-
-/* ------------------------------------------------------------------ */
-/*  Matching logic                                                     */
-/* ------------------------------------------------------------------ */
-
-/*
- * match_buy: walk sell list (ascending price) from the front.
- *   front = lowest ask — compare against buy limit price.
- *   Stop as soon as ask > buy price (no more matchable sells).
- */
-static int match_buy(BaselineBook *bk,
-                     Order        *buy,
-                     Trade        *trades,
-                     int           verbose) {
-    int      count = 0;
-    BLNode **pp    = &bk->sell_head;
-
-    while (*pp && buy->quantity > 0) {
-        Order *sell = &(*pp)->order;
-
-        /* sell list is ascending: once sell price > buy price, done */
-        if (sell->price > buy->price) break;
-
-        /* ---- match! ---- */
-        int qty = (buy->quantity < sell->quantity)
-                    ? buy->quantity : sell->quantity;
-
-        Trade t;
-        t.buy_id   = buy->id;
-        t.sell_id  = sell->id;
-        t.price    = sell->price;   /* passive side sets price */
-        t.quantity = qty;
-        trades[count++] = t;
-
-        bk->matched_trades++;
-        bk->total_matched_qty += qty;
-        if (verbose) trade_print(&t);
-
-        buy->quantity  -= qty;
-        sell->quantity -= qty;
-
-        if (sell->quantity == 0) {
-            remove_node(pp);    /* *pp now points to next sell */
-        } else {
-            /* sell partially filled; buy must be exhausted */
-            pp = &(*pp)->next;  /* advance (won't iterate again) */
+void baseline_process_order(Order *order, int debug) {
+    int remaining_qty = order->quantity;
+    
+    if (debug) {
+        printf("\n   [BASELINE] Processing %s Order #%d (Qty: %d, Price: %.0f)\n",
+               order->type == BUY ? "BUY" : "SELL",
+               order->id, order->quantity, order->price);
+    }
+    
+    if (order->type == BUY) {
+        // BUY order: match with SELL orders
+        if (debug) {
+            printf("\n     Scanning unordered SELL list linearly...\n");
         }
-    }
-    return count;
-}
-
-/*
- * match_sell: walk buy list (descending price) from the front.
- *   front = highest bid — compare against sell limit price.
- *   Stop as soon as bid < sell price.
- */
-static int match_sell(BaselineBook *bk,
-                      Order        *sell,
-                      Trade        *trades,
-                      int           verbose) {
-    int      count = 0;
-    BLNode **pp    = &bk->buy_head;
-
-    while (*pp && sell->quantity > 0) {
-        Order *buy = &(*pp)->order;
-
-        /* buy list is descending: once buy price < sell price, done */
-        if (buy->price < sell->price) break;
-
-        int qty = (sell->quantity < buy->quantity)
-                    ? sell->quantity : buy->quantity;
-
-        Trade t;
-        t.buy_id   = buy->id;
-        t.sell_id  = sell->id;
-        t.price    = buy->price;    /* passive side (resting buy) sets price */
-        t.quantity = qty;
-        trades[count++] = t;
-
-        bk->matched_trades++;
-        bk->total_matched_qty += qty;
-        if (verbose) trade_print(&t);
-
-        sell->quantity -= qty;
-        buy->quantity  -= qty;
-
-        if (buy->quantity == 0) {
-            remove_node(pp);
-        } else {
-            pp = &(*pp)->next;
+        
+        int best_idx = -1;
+        double best_price = INFINITY;
+        
+        while (remaining_qty > 0) {
+            best_idx = -1;
+            best_price = INFINITY;
+            
+            // Find the best (lowest) SELL price
+            for (int i = 0; i < sell_book.count; i++) {
+                if (debug) {
+                    printf("\n       -> Checking SELL Order #%d @ Price %.0f ",
+                           sell_book.entries[i].id, sell_book.entries[i].price);
+                }
+                
+                if (sell_book.entries[i].price <= order->price) {
+                    if (debug) {
+                        printf("[Valid candidate]");
+                    }
+                    if (sell_book.entries[i].price < best_price) {
+                        best_price = sell_book.entries[i].price;
+                        best_idx = i;
+                    }
+                } else {
+                    if (debug) {
+                        printf("[No match - Price too high]");
+                    }
+                }
+            }
+            
+            if (best_idx == -1) {
+                if (debug) {
+                    printf("\n\n     No further matches found.\n");
+                }
+                break;
+            }
+            
+            int matched_qty = (remaining_qty < sell_book.entries[best_idx].quantity) 
+                            ? remaining_qty 
+                            : sell_book.entries[best_idx].quantity;
+            
+            if (debug) {
+                printf("\n\n     Best match chosen: Order #%d @ Price %.0f\n",
+                       sell_book.entries[best_idx].id, best_price);
+                printf("\n       Matched %d units.\n", matched_qty);
+            }
+            
+            remaining_qty -= matched_qty;
+            sell_book.entries[best_idx].quantity -= matched_qty;
+            
+            if (sell_book.entries[best_idx].quantity == 0) {
+                if (debug) {
+                    printf("\n       Order #%d fully filled and removed.\n",
+                           sell_book.entries[best_idx].id);
+                }
+                baseline_remove_order(&sell_book, best_idx);
+            }
         }
-    }
-    return count;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Public API                                                         */
-/* ------------------------------------------------------------------ */
-
-int baseline_process(BaselineBook *bk, Order order,
-                     Trade *out_trades, int verbose) {
-    bk->inserted++;
-    int n = 0;
-
-    if (order.type == BUY) {
-        n = match_buy(bk, &order, out_trades, verbose);
-        if (order.quantity > 0) buy_insert(bk, order);
     } else {
-        n = match_sell(bk, &order, out_trades, verbose);
-        if (order.quantity > 0) sell_insert(bk, order);
+        // SELL order: match with BUY orders
+        if (debug) {
+            printf("\n     Scanning unordered BUY list linearly...\n");
+        }
+        
+        int best_idx = -1;
+        double best_price = -INFINITY;
+        
+        while (remaining_qty > 0) {
+            best_idx = -1;
+            best_price = -INFINITY;
+            
+            // Find the best (highest) BUY price
+            for (int i = 0; i < buy_book.count; i++) {
+                if (debug) {
+                    printf("\n       -> Checking BUY Order #%d @ Price %.0f ",
+                           buy_book.entries[i].id, buy_book.entries[i].price);
+                }
+                
+                if (buy_book.entries[i].price >= order->price) {
+                    if (debug) {
+                        printf("[Valid candidate]");
+                    }
+                    if (buy_book.entries[i].price > best_price) {
+                        best_price = buy_book.entries[i].price;
+                        best_idx = i;
+                    }
+                } else {
+                    if (debug) {
+                        printf("[No match - Price too low]");
+                    }
+                }
+            }
+            
+            if (best_idx == -1) {
+                if (debug) {
+                    printf("\n\n     No further matches found.\n");
+                }
+                break;
+            }
+            
+            int matched_qty = (remaining_qty < buy_book.entries[best_idx].quantity) 
+                            ? remaining_qty 
+                            : buy_book.entries[best_idx].quantity;
+            
+            if (debug) {
+                printf("\n\n     Best match chosen: Order #%d @ Price %.0f\n",
+                       buy_book.entries[best_idx].id, best_price);
+                printf("\n       Matched %d units.\n", matched_qty);
+            }
+            
+            remaining_qty -= matched_qty;
+            buy_book.entries[best_idx].quantity -= matched_qty;
+            
+            if (buy_book.entries[best_idx].quantity == 0) {
+                if (debug) {
+                    printf("\n       Order #%d fully filled and removed.\n",
+                           buy_book.entries[best_idx].id);
+                }
+                baseline_remove_order(&buy_book, best_idx);
+            }
+        }
     }
-    return n;
+    
+    // Add remaining quantity to book
+    if (remaining_qty > 0) {
+        if (order->type == BUY) {
+            baseline_add_to_buy_book(order, remaining_qty);
+        } else {
+            baseline_add_to_sell_book(order, remaining_qty);
+        }
+    }
 }
 
-void baseline_print_top5(const BaselineBook *bk) {
-    printf("  +-BUY  book (highest bid first)-+\n");
-    BLNode *n   = bk->buy_head;
-    int     cnt = 0;
-    while (n && cnt < 5) {
-        printf("    [%4d] price=%6.2f  qty=%-4d\n",
-               n->order.id, n->order.price, n->order.quantity);
-        n = n->next;
-        cnt++;
+void baseline_print_book() {
+    printf("\n   === BASELINE FINAL ORDER BOOK ===\n\n");
+    
+    printf("   BUY Book:\n");
+    if (buy_book.count == 0) {
+        printf("\n     (empty)\n");
+    } else {
+        for (int i = 0; i < buy_book.count; i++) {
+            printf("\n     ID:%d Qty:%d @ Prc:%.0f\n",
+                   buy_book.entries[i].id,
+                   buy_book.entries[i].quantity,
+                   buy_book.entries[i].price);
+        }
     }
-    if (!bk->buy_head) printf("    (empty)\n");
-
-    printf("  +-SELL book (lowest  ask first)-+\n");
-    n   = bk->sell_head;
-    cnt = 0;
-    while (n && cnt < 5) {
-        printf("    [%4d] price=%6.2f  qty=%-4d\n",
-               n->order.id, n->order.price, n->order.quantity);
-        n = n->next;
-        cnt++;
+    
+    printf("\n   SELL Book:\n");
+    if (sell_book.count == 0) {
+        printf("\n     (empty)\n");
+    } else {
+        for (int i = 0; i < sell_book.count; i++) {
+            printf("\n     ID:%d Qty:%d @ Prc:%.0f\n",
+                   sell_book.entries[i].id,
+                   sell_book.entries[i].quantity,
+                   sell_book.entries[i].price);
+        }
     }
-    if (!bk->sell_head) printf("    (empty)\n");
+    printf("\n");
 }
 
-int baseline_pending(const BaselineBook *bk) {
-    int cnt = 0;
-    BLNode *n = bk->buy_head;
-    while (n) { cnt++; n = n->next; }
-    n = bk->sell_head;
-    while (n) { cnt++; n = n->next; }
-    return cnt;
+BookEntry* baseline_get_entries(int *buy_count, int *sell_count) {
+    BookEntry *result = (BookEntry *)malloc(sizeof(BookEntry) * (buy_book.count + sell_book.count));
+    *buy_count = buy_book.count;
+    *sell_count = sell_book.count;
+    
+    memcpy(result, buy_book.entries, sizeof(BookEntry) * buy_book.count);
+    memcpy(result + buy_book.count, sell_book.entries, sizeof(BookEntry) * sell_book.count);
+    
+    return result;
 }

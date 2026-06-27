@@ -1,0 +1,65 @@
+/**
+ * Seek → Center → Strike (audit reference)
+ * Turns toward the target WHILE closing, sweeps consistently, re-checks edges every tick.
+ */
+function robotLogic(sensorData, robotState, state) {
+  // ---- Tunables ----
+  const TOF_MAX = 110, SONAR_MAX = 80;
+  const TOF_SEE = 105;     // < this = real ToF contact
+  const SONAR_SEE = 76;    // < this = real sonar contact (below empty/max of 80)
+  const EDGE = 0.5;
+  const SWEEP = 120;       // search spin speed (was 60 — too slow)
+  const CLOSE = 120;       // forward bias while locking
+  const TURN = 135;        // turn authority while locking
+
+  if (!state.mode) { state.mode = 'SEARCH'; state.spinDir = 1; }
+
+  const eFL = sensorData.edge_fl || 0, eFR = sensorData.edge_fr || 0;
+  const eRL = sensorData.edge_rl || 0, eRR = sensorData.edge_rr || 0;
+  const tof = (sensorData.tof_f   !== undefined) ? sensorData.tof_f   : TOF_MAX;
+  const sl  = (sensorData.sonar_l !== undefined) ? sensorData.sonar_l : SONAR_MAX;
+  const sr  = (sensorData.sonar_r !== undefined) ? sensorData.sonar_r : SONAR_MAX;
+
+  const frontEdge = eFL > EDGE || eFR > EDGE;
+  const rearEdge  = eRL > EDGE || eRR > EDGE;
+
+  // ---- P1: EDGE ESCAPE (recomputed every tick from CURRENT sensors) ----
+  if (frontEdge || rearEdge) {
+    state.mode = 'EDGE';
+    if (frontEdge && !rearEdge) {
+      const veer = (eFL > EDGE && !(eFR > EDGE)) ? 1 : (eFR > EDGE && !(eFL > EDGE)) ? -1 : 0;
+      return { leftMotor: -255 + veer * 70, rightMotor: -255 - veer * 70, stateLabel: 'EDGE (Reverse)' };
+    }
+    if (rearEdge && !frontEdge) {
+      return { leftMotor: 255, rightMotor: 255, stateLabel: 'EDGE (Forward)' };
+    }
+    return { leftMotor: 200, rightMotor: -200, stateLabel: 'EDGE (Pivot)' }; // pinned both ends
+  }
+
+  // ---- P2: ATTACK (ToF contact ahead) with light centering ----
+  if (tof < TOF_SEE) {
+    state.mode = 'ATTACK';
+    let l = 255, r = 255;
+    if (sl < SONAR_SEE && !(sr < SONAR_SEE)) { l = 200; state.spinDir = -1; } // drift left to center
+    else if (sr < SONAR_SEE && !(sl < SONAR_SEE)) { r = 200; state.spinDir = 1; } // drift right
+    return { leftMotor: l, rightMotor: r, stateLabel: 'ATTACK' };
+  }
+
+  // ---- P3: LOCK — turn toward target WHILE moving forward (closes distance) ----
+  if (sl < SONAR_SEE || sr < SONAR_SEE) {
+    state.mode = 'LOCK';
+    if (sl <= sr) { // target on the left
+            state.spinDir = 1;
+            return { leftMotor: CLOSE + TURN, rightMotor: CLOSE - TURN, stateLabel: 'LOCK (Right)' };
+      
+    } else {        // target on the right
+            state.spinDir = -1;
+            return { leftMotor: CLOSE - TURN, rightMotor: CLOSE + TURN, stateLabel: 'LOCK (Left)' };
+    }
+  }
+
+  // ---- P4: SEARCH — sweep ONE consistent direction (toward last-seen side) ----
+  state.mode = 'SEARCH';
+  const d = state.spinDir || 1;
+  return { leftMotor: SWEEP * d, rightMotor: -SWEEP * d, stateLabel: 'SEARCH (Sweep)' };
+}

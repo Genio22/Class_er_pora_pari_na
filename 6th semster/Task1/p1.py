@@ -64,25 +64,22 @@ def binary_search(arr, target):
 
 
 
-if __name__ == "__main__":
+print("\n=====Task2====")
+print("=====Linear_search with from file====\n\n")
+file_path = "/run/media/genio/Sahaf Software_s/ALL/Class_er_pora_pari_na/6th semster/Task1/try.txt"
+lin_ser_with_file(file_path)
 
-    print("\n=====Task2====")
-    print("=====Linear_search with from file====\n\n")
-    file_path = "/run/media/genio/Sahaf Software_s/ALL/Class_er_pora_pari_na/6th semster/Task1/try.txt"
-    lin_ser_with_file(file_path)
+print("\n=====Task5====")
+print("=====Selection_sort====\n\n")
+arr = [64, 25, 12, 22, 11]
+selection_sort(arr)
+print("Sorted array is:", arr)
 
-    print("\n=====Task5====")
-    print("=====Selection_sort====\n\n")
-    arr = [64, 25, 12, 22, 11]
-    selection_sort(arr)
-    print("Sorted array is:", arr)
+print("\n=====Task3====")
+print("=====Binary_search====\n\n")
 
-    print("\n=====Task3====")
-    print("=====Binary_search====\n\n")
-    
-    result = binary_search(arr, int(input("Enter a number:  "))) 
-    if result != -1:
-        print("Element is present at index ", result)
-    else:
-        print("Element is not present in array")
-    
+result = binary_search(arr, int(input("Enter a number:  "))) 
+if result != -1:
+    print("Element is present at index ", result)
+else:
+    print("Element is not present in array")
